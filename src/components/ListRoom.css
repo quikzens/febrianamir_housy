@@ -1,0 +1,49 @@
+.list-room {
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 35px 26px;
+  background-color: rgba(196, 196, 196, 0.15);
+}
+
+.room {
+  position: relative;
+  border: 3px solid rgba(196, 196, 196, 0.4);
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.room__price {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.room__amenities {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  top: 20px;
+  left: 20px;
+}
+
+.room__amenity {
+  padding: 4px 11px;
+  border-radius: 3px;
+  background-color: white;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.room__property, .room__address {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.room__address {
+  color: rgba(168, 168, 168, 1);
+}
