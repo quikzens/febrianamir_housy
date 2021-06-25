@@ -1,9 +1,14 @@
-
 import { useState } from "react"
+
+import close_icon from "../assets/images/close-icon.svg"
 
 
 const SignUp = (props) => {
-  const { isSignUpActive , handleSignUpOfApp } = props 
+  const { 
+    isSignUpActive, 
+    handleSignUpOfApp, 
+    toggleSignUpModal 
+  } = props 
 
   const [formValue, setFormValue] = useState({
     fullname: '',
@@ -33,6 +38,9 @@ const SignUp = (props) => {
   return (
     <div className={ `modal modal--signup ${isSignUpActive ? 'show': ''}` }>
       <div className="modal__content">
+        <button className="modal__close" onClick={toggleSignUpModal}>
+          <img src={close_icon} alt="" />
+        </button>
         <h3 className="modal__heading">Sign up</h3>
         <form className="modal__form" onSubmit={handleSubmit}>
           <div className="form-group">

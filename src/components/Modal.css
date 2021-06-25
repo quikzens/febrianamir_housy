@@ -17,6 +17,7 @@
 }
 
 .modal__content {
+  position: relative;
   background-color: white;
   padding: 50px 33px;
   border-radius: 10px;
@@ -36,8 +37,30 @@
   margin-top: 50px;
 }
 
+.modal__close {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  transform: scale(1.1);
+}
+
+.modal__close img {
+  width: 100%;
+}
+
 .form-group label,
 .form-group input {
+  width: 100%;
   display: block;
 }
 

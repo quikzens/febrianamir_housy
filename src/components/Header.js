@@ -35,8 +35,8 @@ class Header extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.showSignInModal = this.showSignInModal.bind(this)
-    this.showSignUpModal = this.showSignUpModal.bind(this)
+    this.toggleSignInModal = this.toggleSignInModal.bind(this)
+    this.toggleSignUpModal = this.toggleSignUpModal.bind(this)
   }
 
   handleChange(e) {
@@ -45,16 +45,28 @@ class Header extends Component {
     })
   }
 
-  showSignInModal() {
-    this.setState({
-      isSignInActive: true
-    })
+  toggleSignInModal() {
+    if (this.state.isSignInActive) {
+      this.setState({
+        isSignInActive: false
+      })
+    } else {
+      this.setState({
+        isSignInActive: true
+      })
+    }    
   }
 
-  showSignUpModal() {
-    this.setState({
-      isSignUpActive: true
-    })
+  toggleSignUpModal() {
+    if (this.state.isSignUpActive) {
+      this.setState({
+        isSignUpActive: false
+      })
+    } else {
+      this.setState({
+        isSignUpActive: true
+      })
+    }  
   }
 
   render() {
@@ -68,24 +80,30 @@ class Header extends Component {
           handleChange={this.handleChange} 
         />
 
-        {/* not login */}
+        {/* if user is not login yet */}
         {!this.props.userState.username && this.props.userState.isGuest && (
           <>
             <div className="header__btns">
-              <button className="header__btn" onClick={this.showSignInModal}>
+              <button className="header__btn" onClick={this.toggleSignInModal}>
                 Sign In
               </button>
-              <button className="header__btn" onClick={this.showSignUpModal}>
+              <button className="header__btn" onClick={this.toggleSignUpModal}>
                 Sign Up
               </button>
             </div>
 
-            <SignIn isSignInActive={this.state.isSignInActive} handleSignInOfApp={this.props.handleSignInOfApp} />
-            <SignUp isSignUpActive={this.state.isSignUpActive} handleSignUpOfApp={this.props.handleSignUpOfApp} />
+            <SignIn 
+              isSignInActive={this.state.isSignInActive} 
+              handleSignInOfApp={this.props.handleSignInOfApp} toggleSignInModal={this.toggleSignInModal} 
+            />
+            <SignUp 
+              isSignUpActive={this.state.isSignUpActive} 
+              handleSignUpOfApp={this.props.handleSignUpOfApp} toggleSignUpModal={this.toggleSignUpModal} 
+            />
           </>
         )}     
 
-        {/* login */}
+        {/* if user has been login */}
         {this.props.userState.username && !this.props.userState.isGuest && (
           <UserInfo handleLogOutOfApp={this.props.handleLogOutOfApp} />
         )}

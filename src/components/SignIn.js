@@ -1,9 +1,14 @@
-
 import { useState } from "react"
+
+import close_icon from "../assets/images/close-icon.svg"
 
 
 const SignIn = (props) => {
-  const { isSignInActive , handleSignInOfApp } = props 
+  const { 
+    isSignInActive, 
+    handleSignInOfApp, 
+    toggleSignInModal 
+  } = props 
 
   const [formValue, setFormValue] = useState({
     username: '',
@@ -28,6 +33,9 @@ const SignIn = (props) => {
   return (
     <div className={ `modal modal--signin ${isSignInActive ? 'show': ''}` }>
       <div className="modal__content">
+        <button className="modal__close" onClick={toggleSignInModal}>
+          <img src={close_icon} alt="" />
+        </button>
         <h3 className="modal__heading">
           Sign in
         </h3>
