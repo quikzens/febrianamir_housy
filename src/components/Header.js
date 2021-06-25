@@ -1,4 +1,6 @@
-import React, { Component, useState } from "react"
+import React, { Component } from "react"
+
+import SignIn from "./SignIn"
 
 import "./Header.css"
 
@@ -24,10 +26,14 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      isSignInActive: false,
+      isSignUpActive: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.showSignInModal = this.showSignInModal.bind(this)
+    this.showSignUpModal = this.showSignUpModal.bind(this)
   }
 
   handleChange(e) {
@@ -36,24 +42,70 @@ class Header extends Component {
     })
   }
 
+  showSignInModal() {
+    this.setState({
+      isSignInActive: true
+    })
+  }
+
+  showSignUpModal() {
+    this.setState({
+      isSignUpActive: true
+    })
+  }
+
   render() {
     return (
       <header className="header">
         <img className="header__logo" src={logo} alt="" />
+
         <SearchBox 
           applySearch={this.props.applySearch} 
           searchValue={this.state.searchValue} 
           handleChange={this.handleChange} 
         />
-        <div className="header__btns">
-          <button className="header__btn">
-            Sign In
-          </button>
-          <button className="header__btn">
-            Sign Up
-          </button>
-        </div>
-      </header>        
+
+        {!this.props.userState.username && this.props.userState.isGuest && (
+          <>
+            <div className="header__btns">
+              <button className="header__btn" onClick={this.showSignInModal}>
+                Sign In
+              </button>
+              <button className="header__btn" onClick={this.showSignUpModal}>
+                Sign Up
+              </button>
+            </div>
+
+            <SignIn isSignInActive={this.state.isSignInActive} handleSignInOfApp={this.props.handleSignInOfApp} />
+
+            <div className={ `modal modal--signup ${this.state.isSignUpActive ? 'show': ''}` }>
+              <div className="modal__content">
+                <h3 className="modal__heading">Sign up</h3>
+                <form className="modal__form">
+                  <div className="form-group">
+                    <label htmlFor="fullname">Full Name</label>
+                    <input type="text" name="fullname" id="fullname" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" id="username" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" />
+                  </div>
+                  <button className="modal__submit" type="submit">Sign up</button>
+                </form>
+              </div>
+            </div>
+          </>
+        )}        
+
+        </header>               
     )
   }
 }
