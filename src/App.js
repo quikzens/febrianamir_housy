@@ -18,6 +18,7 @@ class App extends Component {
     }
 
     this.handleSignIn = this.handleSignIn.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
   }
 
   handleSignIn(username, password) {
@@ -28,13 +29,28 @@ class App extends Component {
 
     localStorage.setItem('username', username)
     localStorage.setItem('isGuest', false)
-    console.log('oke')
+  }
+
+  handleSignUp(userData) {
+    const { fullname, username, email, password, status, gender, address } = userData
+
+    this.setState({
+      username: username,
+      isGuest: false
+    })
+
+    localStorage.setItem('username', username)
+    localStorage.setItem('isGuest', false)
   }
 
   render() {
     return (
       <React.Fragment>
-        <Home userState={this.state} handleSignInOfApp={this.handleSignIn} />
+        <Home 
+          userState={this.state} 
+          handleSignInOfApp={this.handleSignIn} 
+          handleSignUpOfApp={this.handleSignUp} 
+        />
       </React.Fragment>
     )
   }  

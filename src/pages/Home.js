@@ -8,7 +8,12 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <Main rooms={rooms} handleSignInOfApp={this.props.handleSignInOfApp} userState={this.props.userState} />
+        <Main 
+          rooms={rooms} 
+          handleSignInOfApp={this.props.handleSignInOfApp} 
+          handleSignUpOfApp={this.props.handleSignUpOfApp} 
+          userState={this.props.userState} 
+        />
       </React.Fragment>
     )
   }

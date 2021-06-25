@@ -70,15 +70,24 @@ class Main extends Component {
   applyFilter() {
     const unfilteredContent = this.props.rooms
     const filteredContent = []
+
     unfilteredContent.forEach(item => {
       let isAmenityPassed = false
       const itemAmenities = new mySet(item.amenities)
       const ruleAmenities = new mySet(this.state.filterAmenities)
       isAmenityPassed = ruleAmenities.subset(itemAmenities)
-      if (item.rent === this.state.filterRent && item.bedroom === this.state.filterBedroom && item.bathroom === this.state.filterBathroom && item.price <= this.state.filterBudget && isAmenityPassed) {
+
+      if (
+        item.rent === this.state.filterRent && 
+        item.bedroom === this.state.filterBedroom && 
+        item.bathroom === this.state.filterBathroom && 
+        item.price <= this.state.filterBudget && 
+        isAmenityPassed
+      ) {
         filteredContent.push(item)
       }
     })
+
     this.setState({
       contents: filteredContent
     })
@@ -100,9 +109,19 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header applySearch={this.applySearch} handleSignInOfApp={this.props.handleSignInOfApp} userState={this.props.userState} />
+        <Header 
+          applySearch={this.applySearch} 
+          handleSignInOfApp={this.props.handleSignInOfApp} 
+          handleSignUpOfApp={this.props.handleSignUpOfApp} 
+          userState={this.props.userState} 
+        />
         <main className="main">
-          <FilterRoom changeRules={this.changeRules} list={this.state.contents} applyFilter={this.applyFilter} stateOfMain={this.state} />
+          <FilterRoom 
+            changeRules={this.changeRules} 
+            list={this.state.contents} 
+            applyFilter={this.applyFilter} 
+            stateOfMain={this.state} 
+          />
           <ListRoom list={this.state.contents} />
         </main> 
       </React.Fragment>

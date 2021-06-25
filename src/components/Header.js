@@ -1,8 +1,10 @@
 import React, { Component } from "react"
 
 import SignIn from "./SignIn"
+import SignUp from "./SignUp"
 
 import "./Header.css"
+import "./Modal.css"
 
 import logo from "../assets/images/logo.svg"
 import search_icon from "../assets/images/search-icon.svg"
@@ -77,31 +79,7 @@ class Header extends Component {
             </div>
 
             <SignIn isSignInActive={this.state.isSignInActive} handleSignInOfApp={this.props.handleSignInOfApp} />
-
-            <div className={ `modal modal--signup ${this.state.isSignUpActive ? 'show': ''}` }>
-              <div className="modal__content">
-                <h3 className="modal__heading">Sign up</h3>
-                <form className="modal__form">
-                  <div className="form-group">
-                    <label htmlFor="fullname">Full Name</label>
-                    <input type="text" name="fullname" id="fullname" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" />
-                  </div>
-                  <button className="modal__submit" type="submit">Sign up</button>
-                </form>
-              </div>
-            </div>
+            <SignUp isSignUpActive={this.state.isSignUpActive} handleSignUpOfApp={this.props.handleSignUpOfApp} />
           </>
         )}        
 
