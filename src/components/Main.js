@@ -113,6 +113,7 @@ class Main extends Component {
           applySearch={this.applySearch} 
           handleSignInOfApp={this.props.handleSignInOfApp} 
           handleSignUpOfApp={this.props.handleSignUpOfApp} 
+          handleLogOutOfApp={this.props.handleLogOutOfApp} 
           userState={this.props.userState} 
         />
         <main className="main">

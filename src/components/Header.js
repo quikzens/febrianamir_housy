@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
+import UserInfo from "./UserInfo"
 
 import "./Header.css"
 import "./Modal.css"
@@ -67,6 +68,7 @@ class Header extends Component {
           handleChange={this.handleChange} 
         />
 
+        {/* not login */}
         {!this.props.userState.username && this.props.userState.isGuest && (
           <>
             <div className="header__btns">
@@ -81,7 +83,12 @@ class Header extends Component {
             <SignIn isSignInActive={this.state.isSignInActive} handleSignInOfApp={this.props.handleSignInOfApp} />
             <SignUp isSignUpActive={this.state.isSignUpActive} handleSignUpOfApp={this.props.handleSignUpOfApp} />
           </>
-        )}        
+        )}     
+
+        {/* login */}
+        {this.props.userState.username && !this.props.userState.isGuest && (
+          <UserInfo handleLogOutOfApp={this.props.handleLogOutOfApp} />
+        )}
 
         </header>               
     )

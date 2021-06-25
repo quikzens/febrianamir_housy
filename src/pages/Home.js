@@ -12,6 +12,7 @@ class Home extends Component {
           rooms={rooms} 
           handleSignInOfApp={this.props.handleSignInOfApp} 
           handleSignUpOfApp={this.props.handleSignUpOfApp} 
+          handleLogOutOfApp={this.props.handleLogOutOfApp} 
           userState={this.props.userState} 
         />
       </React.Fragment>

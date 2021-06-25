@@ -8,8 +8,8 @@ class App extends Component {
 
     const username = localStorage.getItem('username')
     let isGuest = true
-    if (localStorage.getItem('isGuest') !== null) {
-      isGuest = localStorage.getItem('isGuest')
+    if (username) {
+      isGuest = false
     }
 
     this.state = {
@@ -19,28 +19,40 @@ class App extends Component {
 
     this.handleSignIn = this.handleSignIn.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
+    this.handleLogOut = this.handleLogOut.bind(this)
   }
 
   handleSignIn(username, password) {
-    this.setState({
-      username: username,
-      isGuest: false
-    })
+    if (username && password) {
+      this.setState({
+        username: username,
+        isGuest: false
+      })
 
-    localStorage.setItem('username', username)
-    localStorage.setItem('isGuest', false)
+      localStorage.setItem('username', username)
+    }    
   }
 
   handleSignUp(userData) {
     const { fullname, username, email, password, status, gender, address } = userData
 
+    if (username) {
+      this.setState({
+        username: username,
+        isGuest: false
+      })
+
+      localStorage.setItem('username', username)
+    }
+  }
+
+  handleLogOut() {
     this.setState({
-      username: username,
-      isGuest: false
+      username: null,
+      isGuest: true
     })
 
-    localStorage.setItem('username', username)
-    localStorage.setItem('isGuest', false)
+    localStorage.clear()
   }
 
   render() {
@@ -50,6 +62,7 @@ class App extends Component {
           userState={this.state} 
           handleSignInOfApp={this.handleSignIn} 
           handleSignUpOfApp={this.handleSignUp} 
+          handleLogOutOfApp={this.handleLogOut}
         />
       </React.Fragment>
     )
