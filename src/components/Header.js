@@ -5,7 +5,6 @@ import SignUp from "./SignUp"
 import UserInfo from "./UserInfo"
 
 import "./Header.css"
-import "./Modal.css"
 
 import logo from "../assets/images/logo.svg"
 import search_icon from "../assets/images/search-icon.svg"
@@ -96,6 +95,7 @@ class Header extends Component {
               isSignInActive={this.state.isSignInActive} 
               handleSignInOfApp={this.props.handleSignInOfApp} toggleSignInModal={this.toggleSignInModal} 
             />
+            
             <SignUp 
               isSignUpActive={this.state.isSignUpActive} 
               handleSignUpOfApp={this.props.handleSignUpOfApp} toggleSignUpModal={this.toggleSignUpModal} 

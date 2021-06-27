@@ -1,21 +1,19 @@
 import React, { Component } from "react"
 import Main from "../components/Main"
 
-import { rooms } from "../data/rooms"
+import { homes } from "../data/homes"
 
 
 class Home extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Main 
-          rooms={rooms} 
-          handleSignInOfApp={this.props.handleSignInOfApp} 
-          handleSignUpOfApp={this.props.handleSignUpOfApp} 
-          handleLogOutOfApp={this.props.handleLogOutOfApp} 
-          userState={this.props.userState} 
-        />
-      </React.Fragment>
+      <Main 
+        rooms={homes} 
+        handleSignInOfApp={this.props.handleSignInOfApp} 
+        handleSignUpOfApp={this.props.handleSignUpOfApp} 
+        handleLogOutOfApp={this.props.handleLogOutOfApp} 
+        userState={this.props.userState} 
+      />
     )
   }
 }

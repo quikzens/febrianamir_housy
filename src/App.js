@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import Home from './pages/Home'
+import DetailProperty from './pages/DetailProperty'
+
+import { UserContext } from './UserContext'
 
 
 class App extends Component {
@@ -58,12 +63,33 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Home 
-          userState={this.state} 
-          handleSignInOfApp={this.handleSignIn} 
-          handleSignUpOfApp={this.handleSignUp} 
-          handleLogOutOfApp={this.handleLogOut}
-        />
+        <UserContext.Provider
+          value={{
+            userState: this.state,
+            handleSignInOfApp: this.handleSignIn,
+            handleSignUpOfApp: this.handleSignUp,
+            handleLogOutOfApp: this.handleLogOut,
+          }}
+        >
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Home 
+                  userState={this.state} 
+                  handleSignInOfApp={this.handleSignIn} 
+                  handleSignUpOfApp={this.handleSignUp} 
+                  handleLogOutOfApp={this.handleLogOut}
+                />
+              </Route>
+              <Route path="/detail/:id">
+                <DetailProperty />
+              </Route>
+              <Route path="*">
+                <h1>Sorry, this page doesn't exist</h1>
+              </Route>
+            </Switch>
+          </Router>
+        </UserContext.Provider>
       </React.Fragment>
     )
   }  

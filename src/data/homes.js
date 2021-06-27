@@ -8,7 +8,7 @@ import home7 from "../assets/images/home-7.jpg"
 import home8 from "../assets/images/home-8.jpg"
 import home9 from "../assets/images/home-9.jpg"
 
-export const rooms = [
+export const homes = [
   {
     image: home1,
     price: 9000000,

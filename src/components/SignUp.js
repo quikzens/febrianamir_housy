@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import "./Modal.css"
+
 import close_icon from "../assets/images/close-icon.svg"
 
 

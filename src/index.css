@@ -246,6 +246,7 @@ th:not([align]) {
 
 /* Global */
 body {
+  position: relative;
   font-family: "Avenir", sans-serif;
   font-size: 18px;
   font-weight: 900;
