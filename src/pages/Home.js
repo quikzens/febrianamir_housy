@@ -1,6 +1,8 @@
 import { useContext, useEffect } from 'react'
-import HomeTenant from '../components/HomeTenant'
 import { UserContext } from '../UserContext'
+
+import HomeTenant from '../components/HomeTenant'
+import HomeOwner from '../components/HomeOwner'
 
 
 const Home = (props) => {
@@ -13,13 +15,13 @@ const Home = (props) => {
   } = props
 
   useEffect(() => {
-    console.log(userState)
+    console.log(userState.status)
   }, [])
   
   return (
     <>
       {userState.status === 'owner' ? (
-        <h1>Ups, not tenant</h1>
+        <HomeOwner userState={userState} />
       ) : (
         <HomeTenant 
           userState={userState} 

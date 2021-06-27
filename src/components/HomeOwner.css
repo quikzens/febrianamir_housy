@@ -1,0 +1,42 @@
+.home-owner {
+  padding: 60px 80px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.home-owner h2 {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.home-owner__table {
+  width: 100%;
+}
+
+.home-owner__table tr {
+  display: flex;
+  justify-content: stretch;
+  border-bottom: 2px solid rgba(196, 196, 196, 1);
+}
+
+.home-owner__table tr:nth-child(odd) {
+  background-color: white;
+}
+
+.home-owner__table td,
+.home-owner__table th {
+  width: 200px;
+  padding: 25px 8px;
+}
+
+.home-owner__table td {
+  font-weight: 400;
+}
+
+.home-owner__table td:last-child img {
+  cursor: pointer;
+}
+
+
+

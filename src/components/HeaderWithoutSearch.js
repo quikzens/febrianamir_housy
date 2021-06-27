@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext"
 import SignIn from "./SignIn"
 import SignUp from "./SignUp"
 import UserInfo from "./UserInfo"
+import OwnerInfo from "./OwnerInfo"
 
 import "./Header.css"
 
@@ -73,16 +74,24 @@ const HeaderWithoutSearch = () => {
 
           <SignIn 
             isSignInActive={state.isSignInActive} 
-            handleSignInOfApp={handleSignInOfApp} toggleSignInModal={toggleSignInModal} 
+            handleSignInOfApp={handleSignInOfApp} 
+            toggleSignInModal={toggleSignInModal} 
           />
           
           <SignUp 
             isSignUpActive={state.isSignUpActive} 
-            handleSignUpOfApp={handleSignUpOfApp} toggleSignUpModal={toggleSignUpModal} 
+            handleSignUpOfApp={handleSignUpOfApp} 
+            toggleSignUpModal={toggleSignUpModal} 
           />
         </>
       ) : (
-        <UserInfo handleLogOutOfApp={handleLogOutOfApp} />
+        <>
+          {userState.status === 'owner' ? (
+            <OwnerInfo handleLogOutOfApp={handleLogOutOfApp} />
+          ) : (
+            <UserInfo handleLogOutOfApp={handleLogOutOfApp} />
+          )} 
+        </>       
       )}           
 
     </header>               
