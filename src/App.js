@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import DetailProperty from './pages/DetailProperty'
 import Profile from './pages/Profile'
 import Booking from './pages/Booking'
+import History from './pages/History'
 
 import { users } from './data/users'
 
@@ -124,6 +125,9 @@ class App extends Component {
               </Route>
               <Route path="/booking/">
                 <Booking />
+              </Route>
+              <Route path="/history/">
+                <History />
               </Route>
               <Route path="/profile/:username" children={<Profile />}></Route>
               <Route path="/detail/:id">
