@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../../UserContext'
 
 import './Modal.css'
-import '../pages/Booking.css'
+import '../../pages/Booking.css'
 
-import logo from '../assets/images/logo.svg'
-import close_icon from '../assets/images/close-icon.svg'
-import payment_proof from '../assets/images/payment-proof.png'
+import logo from '../../assets/images/logo.svg'
+import close_icon from '../../assets/images/close-icon.svg'
+import payment_proof from '../../assets/images/payment-proof.png'
 
 
 const DetailInvo = (props) => {  
@@ -29,16 +29,16 @@ const DetailInvo = (props) => {
         <button className="modal__close" onClick={toggleModal}>
           <img src={close_icon} alt="" />
         </button>
-        <div class="booking__content" style={{ border: 0 }}>
-          <div>
-            <div>
-              <img src={logo} alt="" class="booking__logo" />
+        <div className="booking__content" style={{ border: 0 }}>
+          <div className="booking__section">
+            <div className="booking__section__sub">
+              <img src={logo} alt="" className="booking__logo" />
               <h3>House Astina</h3>
               <p style={{ fontWeight: '400' }}>
                 Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren, Tangerang Selatang
               </p>
             </div>
-            <div class="booking__info">
+            <div className="booking__info">
               <div>
                 <h4 style={{ fontWeight: '900' }}>Check-in</h4>
                 <p style={{ fontWeight: '400' }}>30 March 2020</p>
@@ -55,18 +55,13 @@ const DetailInvo = (props) => {
                 <h4 style={{ fontWeight: '900' }}>Type of Rent</h4>
                 <p style={{ fontWeight: '400' }}>Year</p>
               </div>
+            </div>       
+            <div className="booking__payment">
+              <h3>Booking</h3>
+              <p style={{ fontWeight: '400' }}>Saturday, 30 March 2020</p>
+              <img src={payment_proof} alt="" />
             </div>
-          </div>        
-          <div class="booking__payment">
-            <h3>Booking</h3>
-            <p style={{ fontWeight: '400' }}>Saturday, 30 March 2020</p>
-            <img src={payment_proof} alt="" />
-          </div>
-        </div>
-        <div class="booking__table">
-          <div class="booking__table__no">
-
-          </div>
+          </div> 
         </div>
         <div className="booking__cta" style={{ display: 'flex', gap: '1.5rem', margin: '10px 35px 0 35px' }}>
           <button 

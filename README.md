@@ -1,8 +1,10 @@
 # TODO
 
 - Use custom properties
-- Please, clean up your code
+- Please, clean up my code
 - Mengubah semua componentnya ke dalam bentuk function
+- Refactor, refactor my code
+- Merapikan struktur projectnya
 
 # What I learned so far
 
@@ -42,4 +44,6 @@ render() {
 }
 ```
 
-- Entah kenapa, fitur "hot reloading" kadang tidak berfungsi, jadi repot harus refresh manual halamannya setiap melakukan perubahan. Tapi, dengan menggunakan `npm run start -FAST_REFRESH=true`, fitur hot reloadingnya kembali berfungsi
+- Tapi mengirim state ke child component menjadi sangat sulit ketika component tree sudah sangat besar dan complex. Terjadi "Prop drilling", dan state dari root component harus di kirim ke sangat banyak child component, ini memakan waktu lama dan sangat rentan error. Sebagai gantinya, lebih baik menggunakan `useContext` untuk keperluan seperti itu.
+
+- Entah kenapa, fitur "hot reloading" kadang tidak berfungsi, jadi repot harus refresh manual halamannya setiap melakukan perubahan. Tapi, dengan menggunakan `npm run start -FAST_REFRESH=true`, fitur hot reloadingnya kembali berfungsi.

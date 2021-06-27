@@ -38,7 +38,7 @@ const UserInfo = (props) => {
           <img src={user_icon} alt="" />
           <p>Profile</p>
         </a>
-        <a className="user-info__dropdown__item" href="/booking">
+        <a className="user-info__dropdown__item" href="/addproperty">
           <img src={cabin_icon} alt="" />
           <p>Add Property</p>
         </a>

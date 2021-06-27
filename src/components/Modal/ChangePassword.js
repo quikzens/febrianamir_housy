@@ -1,6 +1,6 @@
 import "./Modal.css"
 
-import close_icon from "../assets/images/close-icon.svg"
+import close_icon from "../../assets/images/close-icon.svg"
 
 
 const ChangePassword = (props) => {

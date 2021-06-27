@@ -12,21 +12,21 @@ const Booking = () => {
   return (
     <>
       <HeaderWithoutSearch />
-      <div class="booking">
-        <div class="booking__item">
-          <div class="booking__content">
-            <div>
-              <div>
-                <img src={logo} alt="" class="booking__logo" />
+      <div className="booking">
+        <div className="booking__item">
+          <div className="booking__content">
+            <div className="booking__section">
+              <div className="booking__section__sub">
+                <img src={logo} alt="" className="booking__logo" />
                 <h3>House Astina</h3>
                 <p>
-                  Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren, Tangerang Selatang
+                  Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren, Tangerang Selatan
                 </p>
-                <div class={`booking__status ${bookingStatus}`}>
+                <div className={`booking__status ${bookingStatus}`}>
                   {bookingStatusContent}
                 </div>
               </div>
-              <div class="booking__info">
+              <div className="booking__info">
                 <div>
                   <h4>Check-in</h4>
                   <p>30 March 2020</p>
@@ -43,21 +43,41 @@ const Booking = () => {
                   <h4>Type of Rent</h4>
                   <p>Year</p>
                 </div>
+              </div>      
+              <div className="booking__payment">
+                <h3>Booking</h3>
+                <p>Saturday, 30 March 2020</p>
+                <img src={payment_proof} alt="" />
               </div>
-            </div>        
-            <div class="booking__payment">
-              <h3>Booking</h3>
-              <p>Saturday, 30 March 2020</p>
-              <img src={payment_proof} alt="" />
-            </div>
-          </div>
-          <div class="booking__table">
-            <div class="booking__table__no">
-
-            </div>
-          </div>
+            </div>  
+            <div className="booking__table__container">
+              <table className="booking__table">
+                <tr>
+                  <th>No</th>
+                  <th>Full Name</th>
+                  <th>Gender</th>
+                  <th>Phone</th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Radif Ganteng</td>
+                  <td>Male</td>
+                  <td>083896833112</td>
+                  <td>
+                    <p>Long time rent:</p> 
+                    <p>1 Year</p> 
+                  </td>    
+                </tr>
+                <tfoot>
+                  <p>Total:</p> 
+                  <p>Rp. 3.000.000</p> 
+                </tfoot>
+              </table>
+            </div>           
+          </div>          
         </div>
-        <div class="booking__cta">
+        <div className="booking__cta">
           <button onClick={() => {
             setBookingStatus('waiting-approve')
             setBookingStatusContent('Waiting Approve')

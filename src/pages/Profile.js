@@ -2,7 +2,7 @@ import { useState, useContext } from "react"
 import HeaderWithoutSearch from "../components/HeaderWithoutSearch"
 import { UserContext } from "../UserContext"
 
-import ChangePassword from '../components/ChangePassword'
+import ChangePassword from '../components/Modal/ChangePassword'
 
 import './Profile.css'
 import profil_icon from '../assets/images/profil-icon.svg'

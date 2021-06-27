@@ -12,7 +12,6 @@
   padding: 20px 35px 35px 35px;
   border-radius: 5px;
   border: 2px solid rgba(183, 183, 183, 0.3);
-  display: flex;
 }
 
 .booking__logo {
@@ -43,24 +42,19 @@
   color: rgba(11, 220, 95, 1);  
 }
 
-.booking__content > div:first-child {
+.booking__section {
   display: flex;
 }
 
-.booking__content div:first-child p {
-  font-size: 14px;
-  color: rgba(149, 149, 149, 1);
-}
-
-.booking__content div:first-child h3 {
+.booking__section__sub h3 {
   font-size: 24px;
   font-weight: 900;
   margin-bottom: 7px;
 }
 
-.booking__content div:first-child h3 + p {
-  color: black;
+.booking__section__sub p {
   font-size: 16px;
+  font-weight: 500;
 }
 
 .booking__content div:first-child > div {
@@ -75,6 +69,43 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 70px;
   row-gap: 25px;
+}
+
+.booking__info h4 {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.booking__info p {
+  font-size: 14px;
+  color: rgba(149, 149, 149, 1);
+  font-weight: 400;
+}
+
+.booking__table__container {  
+  margin-left: -35px;
+  margin-right: -35px;
+}
+
+.booking__table {
+  width: 100%;
+  font-size: 17px;
+  margin-top: 40px;
+}
+
+.booking__table tr {
+  border-bottom: 2px solid rgba(183, 183, 183, 0.3);
+}
+
+.booking__table th,
+.booking__table td {
+  padding: 5px 50px 5px 35px;
+}
+
+.booking__table td {
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(149, 149, 149, 1);
 }
 
 .booking__payment {

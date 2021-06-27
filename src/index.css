@@ -223,7 +223,7 @@ th:not([align]) {
 }
 
 /* Avenir Font */
-@font-face {
+/* @font-face {
   font-family: "Avenir";
   src: url(./assets/fonts/AvenirLTStd-Roman.otf);
   font-weight: 400;
@@ -242,12 +242,12 @@ th:not([align]) {
   src: url(./assets/fonts/AvenirLTStd-Black.otf);
   font-weight: 900;
   font-style: normal;
-}
+} */
 
 /* Global */
 body {
   position: relative;
-  font-family: "Avenir", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 900;
   color: #212121;

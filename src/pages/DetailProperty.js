@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import HeaderWithoutSearch from "../components/HeaderWithoutSearch"
-import Booking from "../components/Booking"
+import Booking from "../components/Modal/Booking"
 
 import detail_home_1 from '../assets/images/detail-home-1.jpg'
 import detail_home_2 from '../assets/images/detail-home-2.jpg'

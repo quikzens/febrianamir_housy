@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch'
-import DetailInvo from './DetailInvo'
+import DetailInvo from './Modal/DetailInvo'
 
 import './HomeOwner.css'
 import action_icon from '../assets/images/search-icon-2.svg'

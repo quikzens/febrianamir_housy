@@ -1,5 +1,5 @@
 .filter {
-  max-width: 440px;
+  max-width: 350px;
   padding: 40px 50px;
 }
 
@@ -16,7 +16,7 @@
 .filter__btns {
   display: flex;
   justify-content: stretch;
-  gap: 30px;
+  gap: 15px;
   margin: 10px 0;
 }
 
@@ -34,6 +34,7 @@
 }
 
 .filter__btn {
+  width: 100%;
   padding: 13px 0;
   border-radius: 5px;
   text-decoration: none;
@@ -48,15 +49,6 @@
 .filter__btn.active {
   background-color: rgba(90, 87, 171, 1);
   color: rgba(255, 255, 255, 1);
-}
-
-.filter__btns.type-2 .filter__btn,
-.filter__btns.type-3 .filter__btn {
-  padding: 8px 20px;
-}
-
-.filter__btns:first-of-type .filter__btn {
-  width: 80px;
 }
 
 .filter small {

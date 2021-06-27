@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react"
 
 import { UserContext } from "../UserContext"
 
-import SignIn from "./SignIn"
-import SignUp from "./SignUp"
+import SignIn from "./Modal/SignIn"
+import SignUp from "./Modal/SignUp"
 import UserInfo from "./UserInfo"
 import OwnerInfo from "./OwnerInfo"
 

@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
-import { UserContext } from '../UserContext'
+import { UserContext } from '../../UserContext'
 
 import "./Modal.css"
 
-import close_icon from "../assets/images/close-icon.svg"
+import close_icon from "../../assets/images/close-icon.svg"
 
 
 const SignUp = (props) => {

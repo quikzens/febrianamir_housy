@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
-import SignIn from "./SignIn"
-import SignUp from "./SignUp"
+import SignIn from "./Modal/SignIn"
+import SignUp from "./Modal/SignUp"
 import UserInfo from "./UserInfo"
 
 import "./Header.css"
