@@ -42,6 +42,4 @@ render() {
 }
 ```
 
-- Entah kenapa, fitur "hot reloading" kadang tidak berfungsi, jadi repot harus refresh manual halamannya setiap melakukan perubahan
-
-Tapi, dengan menggunakan `npm run start -FAST_REFRESH=true`, fitur hot reloadingnya kembali berfungsi
+- Entah kenapa, fitur "hot reloading" kadang tidak berfungsi, jadi repot harus refresh manual halamannya setiap melakukan perubahan. Tapi, dengan menggunakan `npm run start -FAST_REFRESH=true`, fitur hot reloadingnya kembali berfungsi
