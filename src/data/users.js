@@ -6,6 +6,7 @@ export const users = [
     password: 'abcde', 
     status: 'tenant', 
     gender: 'male', 
+    phone: '085242930613',
     address: 'Makassar',
   },
   {
@@ -15,6 +16,7 @@ export const users = [
     password: '12345', 
     status: 'owner', 
     gender: 'male', 
+    phone: '085242930613',
     address: 'In the middle of nowhere',
   },
 ]

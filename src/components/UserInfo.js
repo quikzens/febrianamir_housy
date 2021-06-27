@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { UserContext } from "../UserContext"
 
 import avatar from "../assets/images/user-avatar.jpg"
 import user_icon from "../assets/images/user-icon.svg"
@@ -9,6 +10,8 @@ import logout_icon from "../assets/images/logout-icon.svg"
 import "./UserInfo.css"
 
 const UserInfo = (props) => {
+  const { userState } = useContext(UserContext)
+
   const { handleLogOutOfApp } = props 
 
   const [show, setShow] = useState(false)
@@ -31,7 +34,7 @@ const UserInfo = (props) => {
         <img src={avatar} alt="" />
       </div>
       <div className={ `user-info__dropdown ${show ? 'show': ''}` }>
-        <a className="user-info__dropdown__item" href="/profile">
+        <a className="user-info__dropdown__item" href={`/profile/${userState.username}`}>
           <img src={user_icon} alt="" />
           <p>Profile</p>
         </a>

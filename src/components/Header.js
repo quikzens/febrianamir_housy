@@ -80,7 +80,7 @@ class Header extends Component {
         />
 
         {/* if user is not login yet */}
-        {!this.props.userState.username && this.props.userState.isGuest && (
+        {!this.props.userState.username && (
           <>
             <div className="header__btns">
               <button className="header__btn" onClick={this.toggleSignInModal}>
@@ -93,18 +93,18 @@ class Header extends Component {
 
             <SignIn 
               isSignInActive={this.state.isSignInActive} 
-              handleSignInOfApp={this.props.handleSignInOfApp} toggleSignInModal={this.toggleSignInModal} 
+              toggleSignInModal={this.toggleSignInModal} 
             />
             
             <SignUp 
               isSignUpActive={this.state.isSignUpActive} 
-              handleSignUpOfApp={this.props.handleSignUpOfApp} toggleSignUpModal={this.toggleSignUpModal} 
+              toggleSignUpModal={this.toggleSignUpModal} 
             />
           </>
         )}     
 
         {/* if user has been login */}
-        {this.props.userState.username && !this.props.userState.isGuest && (
+        {this.props.userState.username && (
           <UserInfo handleLogOutOfApp={this.props.handleLogOutOfApp} />
         )}
 

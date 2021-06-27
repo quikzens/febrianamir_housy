@@ -1,25 +1,35 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { UserContext } from './UserContext'
 
 import Home from './pages/Home'
 import DetailProperty from './pages/DetailProperty'
+import Profile from './pages/Profile'
 
-import { UserContext } from './UserContext'
+import { users } from './data/users'
+
 
 
 class App extends Component {
   constructor(props) {
     super(props)
 
+    const fullname = localStorage.getItem('fullname')
     const username = localStorage.getItem('username')
-    let isGuest = true
-    if (username) {
-      isGuest = false
-    }
+    const email = localStorage.getItem('email')
+    const status = localStorage.getItem('status')
+    const gender = localStorage.getItem('gender')
+    const address = localStorage.getItem('address')
+    const phone = localStorage.getItem('phone')
 
     this.state = {
-      username: username,
-      isGuest: isGuest,      
+      fullname,
+      username,  
+      email,  
+      status,  
+      gender,  
+      address, 
+      phone
     }
 
     this.handleSignIn = this.handleSignIn.bind(this)
@@ -29,22 +39,47 @@ class App extends Component {
 
   handleSignIn(username, password) {
     if (username && password) {
-      this.setState({
-        username: username,
-        isGuest: false
-      })
+      const userData = users.find((user) => (
+        user.username === username && 
+        user.password === password
+      ))
 
-      localStorage.setItem('username', username)
+      if (userData) {
+        this.setState({
+          fullname: userData.fullname, 
+          username: userData.username, 
+          email: userData.email, 
+          status: userData.status, 
+          gender: userData.gender, 
+          address: userData.address, 
+          phone: userData.phone
+        })
+  
+        localStorage.setItem('fullname', userData.fullname)
+        localStorage.setItem('username', userData.username)
+        localStorage.setItem('email', userData.email)
+        localStorage.setItem('status', userData.status)
+        localStorage.setItem('gender', userData.gender)
+        localStorage.setItem('address', userData.address)
+        localStorage.setItem('phone', userData.phone)
+      }
     }    
   }
 
   handleSignUp(userData) {
-    const { fullname, username, email, password, status, gender, address } = userData
+    const { 
+      fullname, 
+      username, 
+      email, 
+      password, 
+      status, 
+      gender, 
+      address 
+    } = userData
 
     if (username) {
       this.setState({
         username: username,
-        isGuest: false
       })
 
       localStorage.setItem('username', username)
@@ -54,7 +89,6 @@ class App extends Component {
   handleLogOut() {
     this.setState({
       username: null,
-      isGuest: true
     })
 
     localStorage.clear()
@@ -74,12 +108,15 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path="/">
-                <Home 
+                <Home
                   userState={this.state} 
                   handleSignInOfApp={this.handleSignIn} 
                   handleSignUpOfApp={this.handleSignUp} 
                   handleLogOutOfApp={this.handleLogOut}
                 />
+              </Route>
+              <Route path="/profile/:username">
+                <Profile />
               </Route>
               <Route path="/detail/:id">
                 <DetailProperty />

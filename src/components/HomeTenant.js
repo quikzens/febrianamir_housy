@@ -1,13 +1,15 @@
 import React, { Component } from "react"
-import Header from "../components/Header"
+import Header from "./Header"
 import FilterRoom from "./FilterRoom"
 import ListRoom from "./ListRoom"
 
 import mySet from "../library/mySet"
-import "./Main.css"
+import "./HomeTenant.css"
+
+import { homes } from '../data/homes'
 
 
-class Main extends Component {
+class HomeTenant extends Component {
   constructor(props) {
     super(props)
 
@@ -19,7 +21,7 @@ class Main extends Component {
         'Furnished'
       ],
       filterBudget: 12000000,
-      contents: this.props.rooms
+      contents: homes
     }    
 
     this.changeRules = this.changeRules.bind(this)
@@ -108,11 +110,9 @@ class Main extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Header 
           applySearch={this.applySearch} 
-          handleSignInOfApp={this.props.handleSignInOfApp} 
-          handleSignUpOfApp={this.props.handleSignUpOfApp} 
           handleLogOutOfApp={this.props.handleLogOutOfApp} 
           userState={this.props.userState} 
         />
@@ -125,9 +125,9 @@ class Main extends Component {
           />
           <ListRoom list={this.state.contents} />
         </main> 
-      </React.Fragment>
+      </>
     )
   }
 }
 
-export default Main
+export default HomeTenant

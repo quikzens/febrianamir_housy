@@ -60,7 +60,7 @@ const HeaderWithoutSearch = () => {
         if user is not login: sign in and sign up button 
         if user is login: user info and dropdown
       */}
-      {!userState.username && userState.isGuest ? (
+      {!userState.username  ? (
         <>
           <div className="header__btns">
             <button className="header__btn" onClick={toggleSignInModal}>

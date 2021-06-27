@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { UserContext } from '../UserContext'
 
 import "./Modal.css"
 
@@ -6,9 +7,10 @@ import close_icon from "../assets/images/close-icon.svg"
 
 
 const SignIn = (props) => {
+  const { handleSignInOfApp } = useContext(UserContext)
+  
   const { 
     isSignInActive, 
-    handleSignInOfApp, 
     toggleSignInModal 
   } = props 
 

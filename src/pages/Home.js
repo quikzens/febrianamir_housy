@@ -1,21 +1,35 @@
-import React, { Component } from "react"
-import Main from "../components/Main"
+import { useContext, useEffect } from 'react'
+import HomeTenant from '../components/HomeTenant'
+import { UserContext } from '../UserContext'
 
-import { homes } from "../data/homes"
 
+const Home = (props) => {
+  const { userState } = useContext(UserContext)
 
-class Home extends Component {
-  render() {
-    return (
-      <Main 
-        rooms={homes} 
-        handleSignInOfApp={this.props.handleSignInOfApp} 
-        handleSignUpOfApp={this.props.handleSignUpOfApp} 
-        handleLogOutOfApp={this.props.handleLogOutOfApp} 
-        userState={this.props.userState} 
-      />
-    )
-  }
+  const {
+    handleSignInOfApp,
+    handleSignUpOfApp,
+    handleLogOutOfApp
+  } = props
+
+  useEffect(() => {
+    console.log(userState)
+  }, [])
+  
+  return (
+    <>
+      {userState.status === 'owner' ? (
+        <h1>Ups, not tenant</h1>
+      ) : (
+        <HomeTenant 
+          userState={userState} 
+          handleSignInOfApp={handleSignInOfApp} 
+          handleSignUpOfApp={handleSignUpOfApp} 
+          handleLogOutOfApp={handleLogOutOfApp}
+        />
+      )}   
+    </> 
+  )
 }
 
 export default Home

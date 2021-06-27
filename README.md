@@ -2,6 +2,7 @@
 
 - Use custom properties
 - Please, clean up your code
+- Mengubah semua componentnya ke dalam bentuk function
 
 # What I learned so far
 
