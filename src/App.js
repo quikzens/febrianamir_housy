@@ -5,6 +5,7 @@ import { UserContext } from './UserContext'
 import Home from './pages/Home'
 import DetailProperty from './pages/DetailProperty'
 import Profile from './pages/Profile'
+import Booking from './pages/Booking'
 
 import { users } from './data/users'
 
@@ -82,7 +83,12 @@ class App extends Component {
         username: username,
       })
 
+      localStorage.setItem('fullname', fullname)
       localStorage.setItem('username', username)
+      localStorage.setItem('email', email)
+      localStorage.setItem('status', status)
+      localStorage.setItem('gender', gender)
+      localStorage.setItem('address', address)
     }
   }
 
@@ -92,6 +98,7 @@ class App extends Component {
     })
 
     localStorage.clear()
+    window.location.href = '/'
   }
 
   render() {
@@ -115,9 +122,10 @@ class App extends Component {
                   handleLogOutOfApp={this.handleLogOut}
                 />
               </Route>
-              <Route path="/profile/:username">
-                <Profile />
+              <Route path="/booking/">
+                <Booking />
               </Route>
+              <Route path="/profile/:username" children={<Profile />}></Route>
               <Route path="/detail/:id">
                 <DetailProperty />
               </Route>
