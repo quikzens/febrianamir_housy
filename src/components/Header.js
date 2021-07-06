@@ -1,116 +1,82 @@
-import React, { Component } from "react"
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../UserContext'
 
-import SignIn from "./Modal/SignIn"
-import SignUp from "./Modal/SignUp"
-import UserInfo from "./UserInfo"
+import SignIn from './Modal/SignIn'
+import SignUp from './Modal/SignUp'
+import UserInfo from './UserInfo'
 
-import "./Header.css"
+import './Header.css'
 
-import logo from "../assets/images/logo.svg"
-import search_icon from "../assets/images/search-icon.svg"
-
+import logo from '../assets/images/logo.svg'
+import search_icon from '../assets/images/search-icon.svg'
 
 const SearchBox = (props) => {
   const { applySearch, searchValue, handleChange } = props
 
   return (
-    <div className="header__search-box">
-      <input type="text" onChange={handleChange} />
-      <div className="header__search-btn" onClick={() => applySearch(searchValue)}>
-        <img src={search_icon} alt="" />
+    <div className='header__search-box'>
+      <input type='text' onChange={handleChange} />
+      <div
+        className='header__search-btn'
+        onClick={() => applySearch(searchValue)}
+      >
+        <img src={search_icon} alt='' />
       </div>
     </div>
   )
 }
 
-class Header extends Component {
-  constructor(props) {
-    super(props)
+const Header = (props) => {
+  const { applySearch, isWithSearch } = props
+  const { handleLogOutOfApp, userState } = useContext(UserContext)
 
-    this.state = {
-      searchValue: '',
-      isSignInActive: false,
-      isSignUpActive: false,
-    }
+  const [searchValue, setSearchValue] = useState('')
+  const [isSignInActive, setSignInActive] = useState(false)
+  const [isSignUpActive, setSignUpActive] = useState(false)
 
-    this.handleChange = this.handleChange.bind(this)
-    this.toggleSignInModal = this.toggleSignInModal.bind(this)
-    this.toggleSignUpModal = this.toggleSignUpModal.bind(this)
-  }
+  const handleChange = (e) => setSearchValue(e.target.value)
+  const toggleSignInModal = () => setSignInActive(!isSignInActive)
+  const toggleSignUpModal = () => setSignUpActive(!isSignUpActive)
 
-  handleChange(e) {
-    this.setState({
-      searchValue: e.target.value
-    })
-  }
+  return (
+    <header className='header'>
+      <img className='header__logo' src={logo} alt='' />
 
-  toggleSignInModal() {
-    if (this.state.isSignInActive) {
-      this.setState({
-        isSignInActive: false
-      })
-    } else {
-      this.setState({
-        isSignInActive: true
-      })
-    }    
-  }
-
-  toggleSignUpModal() {
-    if (this.state.isSignUpActive) {
-      this.setState({
-        isSignUpActive: false
-      })
-    } else {
-      this.setState({
-        isSignUpActive: true
-      })
-    }  
-  }
-
-  render() {
-    return (
-      <header className="header">
-        <img className="header__logo" src={logo} alt="" />
-
-        <SearchBox 
-          applySearch={this.props.applySearch} 
-          searchValue={this.state.searchValue} 
-          handleChange={this.handleChange} 
+      {isWithSearch && (
+        <SearchBox
+          applySearch={applySearch}
+          searchValue={searchValue}
+          handleChange={handleChange}
         />
+      )}
 
-        {/* if user is not login yet */}
-        {!this.props.userState.username && (
-          <>
-            <div className="header__btns">
-              <button className="header__btn" onClick={this.toggleSignInModal}>
-                Sign In
-              </button>
-              <button className="header__btn" onClick={this.toggleSignUpModal}>
-                Sign Up
-              </button>
-            </div>
+      {/* if user is not login yet */}
+      {!userState.username ? (
+        <>
+          <div className='header__btns'>
+            <button className='header__btn' onClick={toggleSignInModal}>
+              Sign In
+            </button>
+            <button className='header__btn' onClick={toggleSignUpModal}>
+              Sign Up
+            </button>
+          </div>
 
-            <SignIn 
-              isSignInActive={this.state.isSignInActive} 
-              toggleSignInModal={this.toggleSignInModal} 
-            />
-            
-            <SignUp 
-              isSignUpActive={this.state.isSignUpActive} 
-              toggleSignUpModal={this.toggleSignUpModal} 
-            />
-          </>
-        )}     
+          <SignIn
+            isSignInActive={isSignInActive}
+            toggleSignInModal={toggleSignInModal}
+          />
 
-        {/* if user has been login */}
-        {this.props.userState.username && (
-          <UserInfo handleLogOutOfApp={this.props.handleLogOutOfApp} />
-        )}
-
-        </header>               
-    )
-  }
+          <SignUp
+            isSignUpActive={isSignUpActive}
+            toggleSignUpModal={toggleSignUpModal}
+          />
+        </>
+      ) : (
+        <UserInfo handleLogOutOfApp={handleLogOutOfApp} />
+      )}
+    </header>
+  )
 }
 
 export default Header

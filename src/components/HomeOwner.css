@@ -30,12 +30,28 @@
   padding: 25px 8px;
 }
 
+.home-owner__table th {
+  font-weight: 800;
+}
+
 .home-owner__table td {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .home-owner__table td:last-child img {
   cursor: pointer;
+}
+
+.home-owner .approve {
+  color: rgb(21, 231, 21);
+}
+
+.home-owner .cancel {
+  color: red;
+}
+
+.home-owner .pending {
+  color: rgb(253, 143, 40);
 }
 
 

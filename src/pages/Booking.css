@@ -27,17 +27,17 @@
   padding: 4px 10px;
 }
 
-.booking__status.waiting-payment {
+.waiting-payment .booking__status {
   background-color: rgba(236, 122, 122, 0.2);
   color: rgba(236, 122, 122, 1);  
 }
 
-.booking__status.waiting-approve {
+.waiting-approve .booking__status {
   background-color: rgba(255, 153, 0, 0.2);
   color: rgba(255, 153, 0, 1);  
 }
 
-.booking__status.approve {
+.approve .booking__status {
   background-color: rgba(60, 247, 30, 0.2);
   color: rgba(11, 220, 95, 1);  
 }
@@ -99,13 +99,34 @@
 
 .booking__table th,
 .booking__table td {
-  padding: 5px 50px 5px 35px;
+  padding: 5px 35px 5px 35px;
 }
 
 .booking__table td {
   line-height: 1;
   font-weight: 500;
   color: rgba(149, 149, 149, 1);
+}
+
+.booking__table tfoot tr {
+  border-bottom: 0;
+}
+
+.booking__table .booking__table__info {
+  color: #222;
+  font-weight: 700;
+}
+
+.waiting-payment .booking__table__info__total {
+  color: red;
+}
+
+.waiting-approve .booking__table__info__total {
+  color: rgb(253, 143, 40);
+}
+
+.approve .booking__table__info__total {
+  color: rgb(21, 231, 21);
 }
 
 .booking__payment {

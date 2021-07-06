@@ -1,14 +1,14 @@
-import home1 from "../assets/images/home-1.jpg"
-import home2 from "../assets/images/home-2.jpg"
-import home3 from "../assets/images/home-3.jpg"
-import home4 from "../assets/images/home-4.jpg"
-import home5 from "../assets/images/home-5.jpg"
-import home6 from "../assets/images/home-6.jpg"
-import home7 from "../assets/images/home-7.jpg"
-import home8 from "../assets/images/home-8.jpg"
-import home9 from "../assets/images/home-9.jpg"
+import home1 from '../assets/images/home-1.jpg'
+import home2 from '../assets/images/home-2.jpg'
+import home3 from '../assets/images/home-3.jpg'
+import home4 from '../assets/images/home-4.jpg'
+import home5 from '../assets/images/home-5.jpg'
+import home6 from '../assets/images/home-6.jpg'
+import home7 from '../assets/images/home-7.jpg'
+import home8 from '../assets/images/home-8.jpg'
+import home9 from '../assets/images/home-9.jpg'
 
-export const homes = [
+export const housesData = [
   {
     image: home1,
     price: 9000000,
@@ -17,10 +17,7 @@ export const homes = [
     bathroom: 2,
     area: '1,800',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed'
-    ]
+    amenities: ['Furnished', 'Pet Allowed'],
   },
   {
     image: home2,
@@ -30,9 +27,7 @@ export const homes = [
     bathroom: 1,
     area: '800',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished'
-    ]
+    amenities: ['Furnished'],
   },
   {
     image: home3,
@@ -42,11 +37,7 @@ export const homes = [
     bathroom: 1,
     area: '1,200',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed',
-      'Shared Accomodation'
-    ]
+    amenities: ['Furnished', 'Pet Allowed', 'Shared Accomodation'],
   },
   {
     image: home4,
@@ -56,10 +47,7 @@ export const homes = [
     bathroom: 3,
     area: '2,200',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed'
-    ]
+    amenities: ['Furnished', 'Pet Allowed'],
   },
   {
     image: home5,
@@ -69,9 +57,7 @@ export const homes = [
     bathroom: 1,
     area: '810',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished'
-    ]
+    amenities: ['Furnished'],
   },
   {
     image: home6,
@@ -81,11 +67,7 @@ export const homes = [
     bathroom: 2,
     area: '1900',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed',
-      'Shared Accomodation'
-    ]
+    amenities: ['Furnished', 'Pet Allowed', 'Shared Accomodation'],
   },
   {
     image: home7,
@@ -95,10 +77,7 @@ export const homes = [
     bathroom: 2,
     area: '1900',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed'
-    ]
+    amenities: ['Furnished', 'Pet Allowed'],
   },
   {
     image: home8,
@@ -108,10 +87,7 @@ export const homes = [
     bathroom: 2,
     area: '1800',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed'
-    ]
+    amenities: ['Furnished', 'Pet Allowed'],
   },
   {
     image: home9,
@@ -121,9 +97,7 @@ export const homes = [
     bathroom: 2,
     area: '1800',
     address: 'Sulawesi Selatan, Sudiang',
-    amenities: [
-      'Furnished'
-    ]
+    amenities: ['Furnished'],
   },
   {
     image: home1,
@@ -133,10 +107,6 @@ export const homes = [
     bathroom: 2,
     area: '1800',
     address: 'Tangerang Selatan, Pondok Aren',
-    amenities: [
-      'Furnished',
-      'Pet Allowed',
-      'Shared Accomodation'
-    ]
+    amenities: ['Furnished', 'Pet Allowed', 'Shared Accomodation'],
   },
 ]

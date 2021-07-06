@@ -1,53 +1,54 @@
-import React, { Component } from "react"
-import Header from "./Header"
-import FilterRoom from "./FilterRoom"
-import ListRoom from "./ListRoom"
+import React, { useState } from 'react'
+import Header from './Header'
+import FilterRoom from './FilterRoom/FilterRoom'
+import ListRoom from './ListRoom/ListRoom'
 
-import mySet from "../library/mySet"
-import "./HomeTenant.css"
+import mySet from '../library/mySet'
+import './HomeTenant.css'
 
-import { homes } from '../data/homes'
+import { housesData } from '../data/houses'
 
+const HomeTenant = () => {
+  const [filter, setFilter] = useState({
+    rent: 'year',
+    bedroom: 3,
+    bathroom: 2,
+    amenities: ['Furnished'],
+    budget: 12000000,
+  })
+  const [houses, setHouses] = useState(housesData)
 
-class HomeTenant extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      filterRent: 'year',
-      filterBedroom: 3,
-      filterBathroom: 2,
-      filterAmenities: [
-        'Furnished'
-      ],
-      filterBudget: 12000000,
-      contents: homes
-    }    
-
-    this.changeRules = this.changeRules.bind(this)
-    this.applyFilter = this.applyFilter.bind(this)
-    this.applySearch = this.applySearch.bind(this)
-  }
-
-  changeRules(ruleType, ruleValue) {
-    switch(ruleType) {
-      case 'filterRent':
-        this.setState({
-          filterRent: ruleValue
+  const updateFilter = (ruleType, ruleValue) => {
+    switch (ruleType) {
+      case 'rent':
+        setFilter((filter) => {
+          return {
+            ...filter,
+            rent: ruleValue,
+          }
         })
         break
-      case 'filterBedroom':
-        this.setState({
-          filterBedroom: ruleValue
+
+      case 'bedroom':
+        setFilter((filter) => {
+          return {
+            ...filter,
+            bedroom: ruleValue,
+          }
         })
         break
-      case 'filterBathroom':
-        this.setState({
-          filterBathroom: ruleValue
+
+      case 'bathroom':
+        setFilter((filter) => {
+          return {
+            ...filter,
+            bathroom: ruleValue,
+          }
         })
         break
+
       case 'amenities':
-        const amenities = this.state.filterAmenities
+        const amenities = filter.amenities
 
         if (amenities.indexOf(ruleValue) >= 0) {
           amenities.splice(amenities.indexOf(ruleValue), 1)
@@ -55,79 +56,72 @@ class HomeTenant extends Component {
           amenities.push(ruleValue)
         }
 
-        this.setState({
-          filterAmenities: amenities
+        setFilter((filter) => {
+          return {
+            ...filter,
+            amenities: amenities,
+          }
         })
         break
+
       case 'budget':
-        this.setState({
-          filterBudget: ruleValue
+        setFilter((filter) => {
+          return {
+            ...filter,
+            budget: ruleValue,
+          }
         })
         break
+
       default:
         break
     }
   }
 
-  applyFilter() {
-    const unfilteredContent = this.props.rooms
+  const applyFilter = () => {
+    const unfilteredContent = housesData
     const filteredContent = []
 
-    unfilteredContent.forEach(item => {
+    unfilteredContent.forEach((item) => {
       let isAmenityPassed = false
       const itemAmenities = new mySet(item.amenities)
-      const ruleAmenities = new mySet(this.state.filterAmenities)
+      const ruleAmenities = new mySet(filter.amenities)
       isAmenityPassed = ruleAmenities.subset(itemAmenities)
 
       if (
-        item.rent === this.state.filterRent && 
-        item.bedroom === this.state.filterBedroom && 
-        item.bathroom === this.state.filterBathroom && 
-        item.price <= this.state.filterBudget && 
+        item.rent === filter.rent &&
+        item.bedroom === filter.bedroom &&
+        item.bathroom === filter.bathroom &&
+        item.price <= filter.budget &&
         isAmenityPassed
       ) {
         filteredContent.push(item)
       }
     })
 
-    this.setState({
-      contents: filteredContent
-    })
+    setHouses(filteredContent)
   }
 
-  applySearch(searchValue) {
-    const contentBeforeSearch = this.props.rooms
-    const contentAfterSearch = []
-    contentBeforeSearch.forEach(item => {
-      if (item.address.includes(searchValue)) {
-        contentAfterSearch.push(item)
-      }
-    })
-    this.setState({
-      contents: contentAfterSearch
-    })
+  const applySearch = (searchValue) => {
+    let houses = housesData
+    houses = houses.filter((house) => house.address.includes(searchValue))
+
+    setHouses(houses)
   }
 
-  render() {
-    return (
-      <>
-        <Header 
-          applySearch={this.applySearch} 
-          handleLogOutOfApp={this.props.handleLogOutOfApp} 
-          userState={this.props.userState} 
+  return (
+    <>
+      <Header applySearch={applySearch} isWithSearch={true} />
+      <main className='main'>
+        <FilterRoom
+          updateFilter={updateFilter}
+          applyFilter={applyFilter}
+          filter={filter}
         />
-        <main className="main">
-          <FilterRoom 
-            changeRules={this.changeRules} 
-            list={this.state.contents} 
-            applyFilter={this.applyFilter} 
-            stateOfMain={this.state} 
-          />
-          <ListRoom list={this.state.contents} />
-        </main> 
-      </>
-    )
-  }
+        <ListRoom houses={houses} />
+      </main>
+    </>
+  )
 }
 
 export default HomeTenant

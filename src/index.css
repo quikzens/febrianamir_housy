@@ -222,33 +222,11 @@ th:not([align]) {
   text-align: left;
 }
 
-/* Avenir Font */
-/* @font-face {
-  font-family: "Avenir";
-  src: url(./assets/fonts/AvenirLTStd-Roman.otf);
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Avenir";
-  src: url(./assets/fonts/AvenirLTStd-Book.otf);
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Avenir";
-  src: url(./assets/fonts/AvenirLTStd-Black.otf);
-  font-weight: 900;
-  font-style: normal;
-} */
-
 /* Global */
 body {
   position: relative;
   font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 900;
-  color: #212121;
+  color: #151515;
 }

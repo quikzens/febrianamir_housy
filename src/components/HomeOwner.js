@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import HeaderWithoutSearch from '../components/HeaderWithoutSearch'
+import Header from '../components/Header'
 import DetailInvo from './Modal/DetailInvo'
 
 import './HomeOwner.css'
@@ -13,10 +13,10 @@ const HomeOwner = () => {
 
   return (
     <>
-      <HeaderWithoutSearch />
-      <div class="home-owner">
-        <h2 class="home-owner__heading">Incoming Transaction</h2>
-        <table class="home-owner__table">
+      <Header isWithSearch={false} />
+      <div class='home-owner'>
+        <h2 class='home-owner__heading'>Incoming Transaction</h2>
+        <table class='home-owner__table'>
           <tr>
             <th>No</th>
             <th>Users</th>
@@ -30,67 +30,64 @@ const HomeOwner = () => {
             <td>Febrian Amir</td>
             <td>Year</td>
             <td>bca.jpg</td>
-            <td>Approve</td>
+            <td className='approve'>Approve</td>
             <td>
-              <img src={action_icon} alt="" onClick={toggleModal}/>
+              <img src={action_icon} alt='' onClick={toggleModal} />
             </td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Febrian Amir</td>
+            <td>Haris Rahman</td>
             <td>Year</td>
             <td>bca.jpg</td>
-            <td>Approve</td>
+            <td className='approve'>Approve</td>
             <td>
-              <img src={action_icon} alt="" />
+              <img src={action_icon} alt='' />
             </td>
           </tr>
           <tr>
             <td>3</td>
-            <td>Febrian Amir</td>
-            <td>Year</td>
+            <td>Amin Subagiyo</td>
+            <td>Month</td>
             <td>bca.jpg</td>
-            <td>Approve</td>
+            <td className='cancel'>Cancel</td>
             <td>
-              <img src={action_icon} alt="" />
+              <img src={action_icon} alt='' />
             </td>
           </tr>
           <tr>
             <td>4</td>
-            <td>Febrian Amir</td>
-            <td>Year</td>
+            <td>Haris Astina</td>
+            <td>Day</td>
             <td>bca.jpg</td>
-            <td>Approve</td>
+            <td className='pending'>Pending</td>
             <td>
-              <img src={action_icon} alt="" />
+              <img src={action_icon} alt='' />
             </td>
           </tr>
           <tr>
             <td>5</td>
-            <td>Febrian Amir</td>
-            <td>Year</td>
-            <td>bca.jpg</td>
-            <td>Approve</td>
+            <td>Aziz Oni On</td>
+            <td>Month</td>
+            <td>bi.jpg</td>
+            <td className='pending'>Pending</td>
             <td>
-              <img src={action_icon} alt="" />
+              <img src={action_icon} alt='' />
             </td>
           </tr>
           <tr>
             <td>6</td>
-            <td>Febrian Amir</td>
+            <td>Sugeng No Pants</td>
             <td>Year</td>
-            <td>bca.jpg</td>
-            <td>Approve</td>
+            <td>bni.jpg</td>
+            <td className='pending'>Pending</td>
             <td>
-              <img src={action_icon} alt="" />
+              <img src={action_icon} alt='' />
             </td>
           </tr>
         </table>
       </div>
-      <DetailInvo 
-        isModalShow={isModalShow}
-        toggleModal={toggleModal}
-      />
+      <DetailInvo isModalShow={isModalShow} toggleModal={toggleModal} />
     </>
   )
 }
