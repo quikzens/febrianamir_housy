@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import Header from './Header'
-import FilterRoom from './FilterRoom/FilterRoom'
-import ListRoom from './ListRoom/ListRoom'
+import React, { useEffect, useState } from 'react'
+import Header from '../Header'
+import FilterRoom from '../FilterRoom/FilterRoom'
+import ListRoom from '../ListRoom/ListRoom'
 
-import mySet from '../library/mySet'
+import { API } from '../../config/api'
+
+import mySet from '../../library/mySet'
 import './HomeTenant.css'
 
-import { housesData } from '../data/houses'
-
-const HomeTenant = () => {
+function HomeTenant() {
   const [filter, setFilter] = useState({
     rent: 'year',
     bedroom: 3,
@@ -16,7 +16,7 @@ const HomeTenant = () => {
     amenities: ['Furnished'],
     budget: 12000000,
   })
-  const [houses, setHouses] = useState(housesData)
+  const [houses, setHouses] = useState(null)
 
   const updateFilter = (ruleType, ruleValue) => {
     switch (ruleType) {
@@ -78,8 +78,8 @@ const HomeTenant = () => {
     }
   }
 
-  const applyFilter = () => {
-    const unfilteredContent = housesData
+  const applyFilter = async () => {
+    const unfilteredContent = await getHouses()
     const filteredContent = []
 
     unfilteredContent.forEach((item) => {
@@ -89,7 +89,7 @@ const HomeTenant = () => {
       isAmenityPassed = ruleAmenities.subset(itemAmenities)
 
       if (
-        item.rent === filter.rent &&
+        item.typeRent === filter.rent &&
         item.bedroom === filter.bedroom &&
         item.bathroom === filter.bathroom &&
         item.price <= filter.budget &&
@@ -102,12 +102,29 @@ const HomeTenant = () => {
     setHouses(filteredContent)
   }
 
-  const applySearch = (searchValue) => {
-    let houses = housesData
-    houses = houses.filter((house) => house.address.includes(searchValue))
-
+  const applySearch = async (searchValue) => {
+    let houses = await getHouses()
+    houses = houses.filter((house) =>
+      house.address.toLowerCase().includes(searchValue.toLowerCase())
+    )
     setHouses(houses)
   }
+
+  const getHouses = async () => {
+    const response = await API.get('/houses')
+    const houses = response.data.data
+    return houses
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setHouses(await getHouses())
+    }
+    fetchData()
+    return () => {
+      setHouses(null)
+    }
+  }, [])
 
   return (
     <>

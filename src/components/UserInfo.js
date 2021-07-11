@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../contexts/UserContext'
 
-import avatar from '../assets/images/user-avatar.jpg'
+import avatar from '../assets/images/avatar.png'
 import user_icon from '../assets/images/user-icon.svg'
 import calendar_icon from '../assets/images/calendar-icon-2.svg'
 import bill_icon from '../assets/images/bill-icon.svg'
@@ -11,16 +11,16 @@ import logout_icon from '../assets/images/logout-icon.svg'
 
 import './UserInfo.css'
 
-const UserInfo = (props) => {
+function UserInfo(props) {
   const { userState } = useContext(UserContext)
-  const { handleLogOutOfApp } = props
+  const { handleLogOut } = props
   const [show, setShow] = useState(false)
 
   const toggleDropdown = () => setShow(!show)
 
   const handleLogout = (e) => {
     e.preventDefault()
-    handleLogOutOfApp()
+    handleLogOut()
   }
 
   return (
@@ -36,7 +36,7 @@ const UserInfo = (props) => {
           <img src={user_icon} alt='' />
           <p>Profile</p>
         </Link>
-        {userState.status === 'tenant' ? (
+        {userState.listAs === 'tenant' ? (
           <Link className='user-info__dropdown__item' to='/booking'>
             <img src={calendar_icon} alt='' />
             <p>My Booking</p>

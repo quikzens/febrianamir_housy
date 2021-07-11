@@ -1,103 +1,89 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { UserContext } from './UserContext'
+import { Link } from 'react-router-dom'
+import { UserContext } from './contexts/UserContext'
+import { API, setAuthToken } from './config/api'
 
 import Home from './pages/Home'
 import DetailProperty from './pages/DetailProperty'
+import AddProperty from './pages/AddProperty'
 import Profile from './pages/Profile'
 import Booking from './pages/Booking'
 import History from './pages/History'
+import PrivateRoute from './components/route/PrivateRoute'
 
-import { users } from './data/users'
+function App() {
+  const [user, setUser] = useState({})
 
-const App = () => {
-  const fullname = localStorage.getItem('fullname')
-  const username = localStorage.getItem('username')
-  const email = localStorage.getItem('email')
-  const status = localStorage.getItem('status')
-  const gender = localStorage.getItem('gender')
-  const address = localStorage.getItem('address')
-  const phone = localStorage.getItem('phone')
+  const config = {
+    'Content-Type': 'application/json',
+  }
 
-  const [user, setUser] = useState({
-    fullname,
-    username,
-    email,
-    status,
-    gender,
-    address,
-    phone,
-  })
+  const handleSignIn = async (username, password) => {
+    const data = {
+      username,
+      password,
+    }
 
-  const handleSignIn = (username, password) => {
-    if (username && password) {
-      const userData = users.find(
-        (user) => user.username === username && user.password === password
-      )
+    const response = await API.post('/signin', data, config)
+    const userData = response.data.data
 
-      if (userData) {
-        setUser({
-          fullname: userData.fullname,
-          username: userData.username,
-          email: userData.email,
-          status: userData.status,
-          gender: userData.gender,
-          address: userData.address,
-          phone: userData.phone,
-        })
-
-        localStorage.setItem('fullname', userData.fullname)
-        localStorage.setItem('username', userData.username)
-        localStorage.setItem('email', userData.email)
-        localStorage.setItem('status', userData.status)
-        localStorage.setItem('gender', userData.gender)
-        localStorage.setItem('address', userData.address)
-        localStorage.setItem('phone', userData.phone)
-      }
+    if (userData) {
+      setUser({ ...userData })
+      setAuthToken(userData.token)
+      localStorage.setItem('user', JSON.stringify(userData))
     }
   }
 
-  const handleSignUp = (userData) => {
-    const { fullname, username, email, password, status, gender, address } =
-      userData
+  const handleSignUp = async (data) => {
+    data = {
+      ...data,
+      listAs: data.status,
+    }
+    delete data.status
+    console.log(data)
 
-    if (username) {
-      setUser({
-        fullname,
-        username,
-        email,
-        status,
-        gender,
-        address,
-      })
+    const response = await API.post('/signup', data, config)
+    const userData = response.data.data
 
-      localStorage.setItem('fullname', fullname)
-      localStorage.setItem('username', username)
-      localStorage.setItem('email', email)
-      localStorage.setItem('status', status)
-      localStorage.setItem('gender', gender)
-      localStorage.setItem('address', address)
+    if (userData.username) {
+      setUser({ ...userData })
+      setAuthToken(userData.token)
+      localStorage.setItem('user', JSON.stringify(userData))
     }
   }
 
   const handleLogOut = () => {
-    setUser({
-      ...user,
-      username: null,
-    })
-
+    // bersihkan state, localstorage, dan token
+    // redirect ke halaman home
+    setUser(null)
     localStorage.clear()
+    setAuthToken()
     window.location.href = '/'
   }
+
+  useEffect(() => {
+    // get username (if exists)
+    const userData = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : null
+    // get token (if exists)
+    if (userData) {
+      if (userData.token) {
+        setAuthToken(userData.token)
+      }
+    }
+    setUser({ ...userData })
+  }, [])
 
   return (
     <>
       <UserContext.Provider
         value={{
           userState: user,
-          handleSignInOfApp: handleSignIn,
-          handleSignUpOfApp: handleSignUp,
-          handleLogOutOfApp: handleLogOut,
+          handleSignIn: handleSignIn,
+          handleSignUp: handleSignUp,
+          handleLogOut: handleLogOut,
         }}
       >
         <Router>
@@ -105,18 +91,16 @@ const App = () => {
             <Route exact path='/'>
               <Home userState={user} />
             </Route>
-            <Route path='/booking/'>
-              <Booking />
-            </Route>
-            <Route path='/history/'>
-              <History />
-            </Route>
-            <Route path='/profile/:username' children={<Profile />}></Route>
+            <PrivateRoute exact path='/booking' component={Booking} />
+            <PrivateRoute exact path='/history' component={History} />
+            <PrivateRoute exact path='/profile/:username' component={Profile} />
             <Route path='/detail/:id'>
               <DetailProperty />
             </Route>
+            <PrivateRoute exact path='/addproperty' component={AddProperty} />
             <Route path='*'>
               <h1>Sorry, this page doesn't exist</h1>
+              <Link to='/'>Back to home</Link>
             </Route>
           </Switch>
         </Router>

@@ -1,11 +1,3 @@
-# TODO
-
-- Use custom properties
-- Please, clean up my code
-- Mengubah semua componentnya ke dalam bentuk function
-- Refactor, refactor my code
-- Merapikan struktur projectnya
-
 # What I learned so far
 
 - setState() ternyata berjalan secara asynchronous, jadi tak bisa di cek/debug dengan console.log(this.state), karena akan selesai dijalankan lebih dulu sebelum setState()

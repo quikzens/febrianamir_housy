@@ -1,28 +1,24 @@
-import { useContext, useState } from "react"
-import { UserContext } from '../../UserContext'
+import { useContext, useState } from 'react'
+import { UserContext } from '../../contexts/UserContext'
 
-import "./Modal.css"
+import './Modal.css'
 
-import close_icon from "../../assets/images/close-icon.svg"
+import close_icon from '../../assets/images/close-icon.svg'
 
+function SignIn(props) {
+  const { handleSignIn } = useContext(UserContext)
 
-const SignIn = (props) => {
-  const { handleSignInOfApp } = useContext(UserContext)
-  
-  const { 
-    isSignInActive, 
-    toggleSignInModal 
-  } = props 
+  const { isSignInActive, toggleSignInModal } = props
 
   const [formValue, setFormValue] = useState({
     username: '',
-    password: ''
+    password: '',
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const { username, password } = formValue
-    handleSignInOfApp(username, password)
+    handleSignIn(username, password)
   }
 
   const handleChange = (e) => {
@@ -30,32 +26,46 @@ const SignIn = (props) => {
 
     setFormValue({
       ...formValue,
-      [name]: value
+      [name]: value,
     })
   }
 
   return (
-    <div className={ `modal modal--signin ${isSignInActive ? 'show': ''}` }>
-      <div className="modal__content">
-        <button className="modal__close" onClick={toggleSignInModal}>
-          <img src={close_icon} alt="" />
+    <div className={`modal modal--signin ${isSignInActive ? 'show' : ''}`}>
+      <div className='modal__content'>
+        <button className='modal__close' onClick={toggleSignInModal}>
+          <img src={close_icon} alt='' />
         </button>
-        <h3 className="modal__heading">
-          Sign in
-        </h3>
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input type="text" name="username" id="username" value={formValue.username} onChange={handleChange} />
+        <h3 className='modal__heading'>Sign in</h3>
+        <form className='modal__form' onSubmit={handleSubmit}>
+          <div className='form-group'>
+            <label htmlFor='username'>Username</label>
+            <input
+              type='text'
+              name='username'
+              id='username'
+              value={formValue.username}
+              onChange={handleChange}
+              required
+            />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" value={formValue.password} onChange={handleChange} />
+          <div className='form-group'>
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              name='password'
+              id='password'
+              value={formValue.password}
+              onChange={handleChange}
+              required
+            />
           </div>
-          <button className="modal__submit" type="submit">Sign in</button>
+          <button className='modal__submit' type='submit'>
+            Sign in
+          </button>
         </form>
-        <p className="modal__info">
-          Don't have an account? Klik <a href="/">Here</a>
+        <p className='modal__info'>
+          Don't have an account? Klik <a href='/'>Here</a>
         </p>
       </div>
     </div>

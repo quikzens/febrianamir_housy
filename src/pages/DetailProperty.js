@@ -1,77 +1,89 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { API } from '../config/api'
 
 import Header from '../components/Header'
 import Booking from '../components/Modal/Booking'
 
-import detail_home_1 from '../assets/images/detail-home-1.jpg'
-import detail_home_2 from '../assets/images/detail-home-2.jpg'
-import detail_home_3 from '../assets/images/detail-home-3.jpg'
-import detail_home_4 from '../assets/images/detail-home-4.jpg'
 import bed_icon from '../assets/images/bed-icon.svg'
 import bath_icon from '../assets/images/bath-icon.svg'
 
 import './DetailProperty.css'
 
-const DetailProperty = () => {
+function DetailProperty() {
+  const { id } = useParams()
   const [isShowModalBook, setShowModalBook] = useState(false)
+  const [house, setHouse] = useState(null)
 
   const toggleModalBook = () => setShowModalBook(!isShowModalBook)
+
+  useEffect(() => {
+    const getHouse = async () => {
+      const response = await API.get(`/house/${id}`)
+      const house = response.data.data
+      setHouse(house)
+    }
+    getHouse()
+    return () => {
+      setHouse(null)
+    }
+  }, [id])
+
+  if (!house) {
+    return <p>Loading...</p>
+  }
 
   return (
     <>
       <Header isWithSearch={false} />
       <div className='detailproperty'>
         <div className='detailproperty__images'>
-          <img src={detail_home_1} alt='' />
-          <img src={detail_home_2} alt='' />
+          <div className='detailproperty__image'>
+            <img src={house.image} alt='' />
+          </div>
+          {/* <img src={detail_home_2} alt='' />
           <img src={detail_home_3} alt='' />
-          <img src={detail_home_4} alt='' />
+          <img src={detail_home_4} alt='' /> */}
         </div>
         <div className='detailproperty__content'>
-          <h1 className='detailproperty__title'>House Astina</h1>
+          <h1 className='detailproperty__title'>{house.name}</h1>
           <div className='detailproperty__info'>
             <div>
-              <div className='detailproperty__price'>Rp.9.000.000 / Year</div>
-              <div className='detailproperty__address'>
-                Jl. Elang IV Perum Permata Bintaro Residence, Pondok
-                Aren,Tangerang Selatan
+              <div className='detailproperty__price'>
+                Rp.
+                {new Intl.NumberFormat(['ban', 'id']).format(
+                  house.price.toString()
+                )}{' '}
+                /{' '}
+                {house.typeRent.charAt(0).toUpperCase() +
+                  house.typeRent.slice(1)}
               </div>
+              <div className='detailproperty__address'>{house.address}</div>
             </div>
             <div className='detailproperty__features'>
               <div className='detailproperty__feature'>
                 <p>Bedrooms</p>
                 <div>
-                  3
+                  {house.bedroom}
                   <img src={bed_icon} alt='' />
                 </div>
               </div>
               <div className='detailproperty__feature'>
                 <p>Bathrooms</p>
                 <div>
-                  3
+                  {house.bathroom}
                   <img src={bath_icon} alt='' />
                 </div>
               </div>
               <div className='detailproperty__feature'>
                 <p>Area</p>
-                <div>1800 ft</div>
+                <div>{house.area} sqft</div>
               </div>
             </div>
           </div>
           <div className='detailproperty__description'>
             <h3>Description</h3>
-            <p>
-              <strong>Lorem Ipsum</strong> is simply dummy text of the printing
-              and typesetting industry. Lorem Ipsum has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer
-              took a galley of type and scrambled it to make a type specimen
-              book. It has survived not only five centuries, but also the leap
-              into electronic typesetting, remaining essentially unchanged. It
-              was popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
+            <p>{house.description}</p>
           </div>
           <div className='detailproperty__cta'>
             <button type='button' onClick={toggleModalBook}>
@@ -83,6 +95,9 @@ const DetailProperty = () => {
       <Booking
         isShowModalBook={isShowModalBook}
         toggleModalBook={toggleModalBook}
+        typeRent={house.typeRent}
+        price={house.price}
+        houseId={house.id}
       />
     </>
   )

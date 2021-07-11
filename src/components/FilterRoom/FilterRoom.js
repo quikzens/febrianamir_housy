@@ -2,11 +2,11 @@ import React from 'react'
 
 import './FilterRoom.css'
 
-import calendar_icon from '../../assets/images/calendar-icon.svg'
-import polygon_icon from '../../assets/images/polygon.svg'
+// import calendar_icon from '../../assets/images/calendar-icon.svg'
+// import polygon_icon from '../../assets/images/polygon.svg'
 import check_icon from '../../assets/images/check.svg'
 
-const FilterButton = (props) => {
+function FilterButton(props) {
   const { ruleType, ruleValue, updateFilter, filter, content } = props
 
   return (
@@ -21,7 +21,7 @@ const FilterButton = (props) => {
   )
 }
 
-const FilterAmenity = (props) => {
+function FilterAmenity(props) {
   const { filter, updateFilter, content } = props
 
   return (
@@ -41,7 +41,7 @@ const FilterAmenity = (props) => {
   )
 }
 
-const FilterBudget = (props) => {
+function FilterBudget(props) {
   const { updateFilter } = props
 
   const changeBudget = (e) => {
@@ -57,7 +57,7 @@ const FilterBudget = (props) => {
   )
 }
 
-const FilterRoom = (props) => {
+function FilterRoom(props) {
   const { filter, updateFilter, applyFilter } = props
 
   return (
@@ -86,7 +86,7 @@ const FilterRoom = (props) => {
           filter={filter}
         />
       </div>
-      <h3 className='filter__heading'>Date</h3>
+      {/* <h3 className='filter__heading'>Date</h3>
       <div className='filter__calendar'>
         <div className='filter__calendar-icon'>
           <img src={calendar_icon} alt='' />
@@ -95,7 +95,7 @@ const FilterRoom = (props) => {
         <div className='filter__polygon-icon'>
           <img src={polygon_icon} alt='' />
         </div>
-      </div>
+      </div> */}
       <h3 className='filter__heading'>Property Room</h3>
       <small>Bedroom</small>
       <div className='filter__btns type-2'>

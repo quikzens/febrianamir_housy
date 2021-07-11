@@ -222,11 +222,33 @@ th:not([align]) {
   text-align: left;
 }
 
+/* Variables */
+:root {
+  --black: #212121;
+  --purple: rgb(90, 87, 171);
+  --red: red;
+  --orange: rgb(253, 143, 40);
+  --green: rgb(21, 231, 21);
+  --light-gray: rgb(249, 249, 249);
+  --gray: rgb(238, 238, 238);
+}
+
 /* Global */
 body {
   position: relative;
   font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 900;
-  color: #151515;
+  color: var(--black);
+}
+
+
+
+
+/*------------------------------------*\
+    #UTILITIES
+\*------------------------------------*/
+
+.text-capitalize {
+  text-transform: capitalize;
 }

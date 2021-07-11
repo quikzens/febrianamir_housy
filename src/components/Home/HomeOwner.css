@@ -50,8 +50,12 @@
   color: red;
 }
 
-.home-owner .pending {
+.home-owner .waiting-approve {
   color: rgb(253, 143, 40);
+}
+
+.home-owner .booking__item .booking__content {
+  border: 0;
 }
 
 

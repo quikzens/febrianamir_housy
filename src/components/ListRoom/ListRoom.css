@@ -1,5 +1,6 @@
 .list-room {
   width: 100%;
+  height: 100%;
   padding: 25px;
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +10,7 @@
 }
 
 .room {
+  user-select: none;
   position: relative;
   border: 3px solid rgba(196, 196, 196, 0.4);
   background-color: transparent;
@@ -16,7 +18,24 @@
   padding: 10px;
 }
 
+.room__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 270px;
+  max-height: 160px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.room__image img {
+  width: 100%;
+}
+
 .room__price {
+  display: block;
+  color: var(--black);
+  text-decoration: none;
   margin-top: 10px;
   font-size: 18px;
 }

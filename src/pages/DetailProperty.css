@@ -9,12 +9,22 @@
   gap: 0.5rem;
 }
 
-.detailproperty__images img {
+.detailproperty__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.detailproperty__image img {
   display: block;
   width: 100%;
 }
 
-.detailproperty__images img:first-child {
+.detailproperty__image:first-child {
   grid-column: span 3;
 }
 

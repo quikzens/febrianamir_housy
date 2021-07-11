@@ -1,15 +1,15 @@
 import { useContext } from 'react'
-import { UserContext } from '../UserContext'
+import { UserContext } from '../contexts/UserContext'
 
-import HomeTenant from '../components/HomeTenant'
-import HomeOwner from '../components/HomeOwner'
+import HomeTenant from '../components/Home/HomeTenant'
+import HomeOwner from '../components/Home/HomeOwner'
 
-const Home = (props) => {
+function Home() {
   const { userState } = useContext(UserContext)
 
   return (
     <>
-      {userState.status === 'owner' ? (
+      {userState.listAs === 'owner' ? (
         <HomeOwner userState={userState} />
       ) : (
         <HomeTenant />

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { UserContext } from '../UserContext'
+import { Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext'
 
 import SignIn from './Modal/SignIn'
 import SignUp from './Modal/SignUp'
@@ -10,7 +11,7 @@ import './Header.css'
 import logo from '../assets/images/logo.svg'
 import search_icon from '../assets/images/search-icon.svg'
 
-const SearchBox = (props) => {
+function SearchBox(props) {
   const { applySearch, searchValue, handleChange } = props
 
   return (
@@ -26,9 +27,9 @@ const SearchBox = (props) => {
   )
 }
 
-const Header = (props) => {
+function Header(props) {
   const { applySearch, isWithSearch } = props
-  const { handleLogOutOfApp, userState } = useContext(UserContext)
+  const { handleLogOut, userState } = useContext(UserContext)
 
   const [searchValue, setSearchValue] = useState('')
   const [isSignInActive, setSignInActive] = useState(false)
@@ -40,7 +41,9 @@ const Header = (props) => {
 
   return (
     <header className='header'>
-      <img className='header__logo' src={logo} alt='' />
+      <Link to='/'>
+        <img className='header__logo' src={logo} alt='' />
+      </Link>
 
       {isWithSearch && (
         <SearchBox
@@ -73,7 +76,7 @@ const Header = (props) => {
           />
         </>
       ) : (
-        <UserInfo handleLogOutOfApp={handleLogOutOfApp} />
+        <UserInfo handleLogOut={handleLogOut} />
       )}
     </header>
   )

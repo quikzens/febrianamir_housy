@@ -1,0 +1,98 @@
+.add-property {
+  padding: 3rem 10rem;
+  background-color: var(--light-gray);
+}
+
+.add-property h2 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.add-property__form {
+  margin-top: 3rem;
+}
+
+.add-property__form-group {
+  margin-bottom: 1.5rem;
+}
+
+.add-property__form-group > label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  font-weight: 700;
+}
+
+.add-property__form-group input[type='text'],
+.add-property__form-group select,
+.add-property__form-group textarea {
+  min-width: 100%;
+  background-color: var(--gray);
+  padding: 5px 10px;
+  border: 2px solid rgb(180, 180, 180);
+  border-radius: 5px;
+}
+
+.add-property__form-group input, 
+.add-property__form-group select {
+  min-height: 40px;
+}
+
+.add-property__form-group select {
+  appearance: none;
+}
+
+.add-property__form-group.amenities > div label {
+  font-weight: 400;
+}
+
+.add-property__form-group.amenities > div {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  gap: 1rem;
+}
+
+.checkbox label {
+  user-select: none;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+  opacity: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.checkbox__control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+}
+
+.checkbox input[type="checkbox"]:checked ~ .checkbox__control {
+  background-color: var(--purple);
+}
+
+.add-property__submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem
+}
+
+.add-property__submit button {
+  padding: 0.75rem 5rem;
+  font-weight: 800;
+  color: white;
+  background-color: var(--purple);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

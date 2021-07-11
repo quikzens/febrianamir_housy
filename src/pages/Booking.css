@@ -1,4 +1,7 @@
 .booking {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
   background-color: #f9f9f9;
   padding: 50px 0;
 }
@@ -8,10 +11,11 @@
   margin: 0 auto;
 }
 
-.booking__content {
+.booking__item .booking__content {
   padding: 20px 35px 35px 35px;
   border-radius: 5px;
   border: 2px solid rgba(183, 183, 183, 0.3);
+  color: var(--black);
 }
 
 .booking__logo {
@@ -44,6 +48,7 @@
 
 .booking__section {
   display: flex;
+  justify-content: space-between;
 }
 
 .booking__section__sub h3 {
@@ -105,7 +110,7 @@
 .booking__table td {
   line-height: 1;
   font-weight: 500;
-  color: rgba(149, 149, 149, 1);
+  color: rgba(149, 149, 149);
 }
 
 .booking__table tfoot tr {
@@ -144,6 +149,8 @@
 .booking__payment img {
   display: block;
   border: 3px solid black;
+  min-width: 150px;
+  min-height: 150px;
 }
 
 .booking__payment p {
@@ -157,15 +164,14 @@
   display: flex;
   justify-content: flex-end;
   max-width: 1035px;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 20px auto;
 }
 
 .booking__cta button {
   padding: 12px 90px;
   font-weight: 900;
   font-size: 18px;
-  background-color: rgba(90, 87, 171, 1);
+  background-color: var(--purple);
   color: white;
   border: 0;
   border-radius: 5px;

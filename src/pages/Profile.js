@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import { UserContext } from '../UserContext'
+import { API } from '../config/api'
 
 import ChangePassword from '../components/Modal/ChangePassword'
 
@@ -12,16 +12,31 @@ import home_icon from '../assets/images/home-icon.svg'
 import gender_icon from '../assets/images/gender-icon.svg'
 import phone_icon from '../assets/images/phone-icon.svg'
 import location_icon from '../assets/images/location-icon.svg'
-import profile_foto from '../assets/images/profil-1.jpg'
+import profile_foto from '../assets/images/profile.png'
 
-const Profile = () => {
-  const { userState } = useContext(UserContext)
-  const { fullname, email, status, gender, phone, address } = userState
-
+function Profile() {
+  const [user, setUser] = useState(null)
   const [isModalShow, setIsModalShow] = useState(false)
 
   const toggleModal = () => setIsModalShow(!isModalShow)
 
+  const getUser = async () => {
+    const response = await API.get('/user')
+    const user = response.data.data
+    return user
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setUser(await getUser())
+    }
+    fetchData()
+    return () => {
+      setUser(null)
+    }
+  }, [])
+
+  if (!user) return <p>Loading...</p>
   return (
     <>
       <Header isWithSearch={false} />
@@ -34,7 +49,7 @@ const Profile = () => {
                 <img src={profil_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{fullname}</h4>
+                <h4>{user.fullname}</h4>
                 <p>Full name</p>
               </div>
             </div>
@@ -43,7 +58,7 @@ const Profile = () => {
                 <img src={email_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{email}</h4>
+                <h4>{user.email}</h4>
                 <p>Email</p>
               </div>
             </div>
@@ -59,6 +74,7 @@ const Profile = () => {
                       e.preventDefault()
                       toggleModal()
                     }}
+                    style={{ color: 'var(--purple)', textDecoration: 'none' }}
                   >
                     Change Password
                   </a>
@@ -71,7 +87,7 @@ const Profile = () => {
                 <img src={home_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{status}</h4>
+                <h4 style={{ textTransform: 'capitalize' }}>{user.listAs}</h4>
                 <p>Status</p>
               </div>
             </div>
@@ -80,7 +96,7 @@ const Profile = () => {
                 <img src={gender_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{gender}</h4>
+                <h4 style={{ textTransform: 'capitalize' }}>{user.gender}</h4>
                 <p>Gender</p>
               </div>
             </div>
@@ -89,7 +105,7 @@ const Profile = () => {
                 <img src={phone_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{phone}</h4>
+                <h4>{user.phone}</h4>
                 <p>Mobile phone</p>
               </div>
             </div>
@@ -98,7 +114,7 @@ const Profile = () => {
                 <img src={location_icon} alt='' />
               </div>
               <div className='profile__info__text'>
-                <h4>{address}</h4>
+                <h4>{user.address}</h4>
                 <p>Address</p>
               </div>
             </div>
@@ -106,6 +122,7 @@ const Profile = () => {
           <div className='profile__photo'>
             <img src={profile_foto} alt='' />
             <button>Change Photo Profile</button>
+            <button>Change Avatar</button>
           </div>
         </div>
       </section>

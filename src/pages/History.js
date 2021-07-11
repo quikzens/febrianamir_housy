@@ -4,7 +4,7 @@ import './Booking.css'
 import qr_code from '../assets/images/qr-code.svg'
 import logo from '../assets/images/logo.svg'
 
-const History = () => {
+function History() {
   return (
     <>
       <Header isWithSearch={false} />

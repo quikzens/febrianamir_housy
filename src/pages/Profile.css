@@ -1,6 +1,6 @@
 .profile {
   padding: 100px 1rem;
-  background-color: #f9f9f9;
+  background-color: var(--light-gray);
 }
 
 .profile__content {
@@ -35,7 +35,6 @@
   margin-bottom: 4px;
   font-weight: 900;
   font-size: 17px;
-  text-transform: capitalize;
 }
 
 .profile__info__text p {

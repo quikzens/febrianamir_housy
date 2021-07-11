@@ -1,18 +1,24 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './ListRoom.css'
 
-const ListRoom = (props) => {
+function ListRoom(props) {
   const { houses } = props
+
+  if (!houses) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div className='list-room'>
-      {houses.map((house, index) => {
+      {houses.map((house) => {
         const {
+          id,
           image,
           amenities,
           price,
-          rent,
+          typeRent,
           bedroom,
           bathroom,
           area,
@@ -20,8 +26,10 @@ const ListRoom = (props) => {
         } = house
 
         return (
-          <div className='room' key={index}>
-            <img className='room__image' src={image} alt='' />
+          <div className='room' key={id}>
+            <div className='room__image'>
+              <img src={image} alt='' />
+            </div>
             <div className='room__amenities'>
               {amenities.map((amenity, index) => (
                 <div className='room__amenity' key={index}>
@@ -29,10 +37,10 @@ const ListRoom = (props) => {
                 </div>
               ))}
             </div>
-            <p className='room__price'>
+            <Link className='room__price' to={`/detail/${id}`}>
               Rp.{new Intl.NumberFormat(['ban', 'id']).format(price.toString())}{' '}
-              / {rent}
-            </p>
+              / {typeRent}
+            </Link>
             <p className='room__property'>
               {bedroom} Beds, {bathroom} Baths, {area} sqft
             </p>
