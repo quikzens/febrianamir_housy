@@ -1,49 +1,52 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router'
-import { API } from '../config/api'
+import { UserContext } from '../contexts/UserContext'
+import { useGet } from '../hooks/useGet'
 
-import Header from '../components/Header'
-import Booking from '../components/Modal/Booking'
-
-import bed_icon from '../assets/images/bed-icon.svg'
-import bath_icon from '../assets/images/bath-icon.svg'
+import Modal from '../components/Modal/Modal'
+import AddTransaction from '../components/form/AddTransaction'
+import AddDetailsImage from '../components/form/AddDetailsImage'
 
 import './DetailProperty.css'
+import bed_icon from '../assets/images/bed-icon.svg'
+import bath_icon from '../assets/images/bath-icon.svg'
 
 function DetailProperty() {
   const { id } = useParams()
   const [isShowModalBook, setShowModalBook] = useState(false)
+  const [isShowAddDetails, setShowAddDetails] = useState(false)
   const [house, setHouse] = useState(null)
+  const { userState } = useContext(UserContext)
+  const { data: dataHouse, invoke: updateHouse } = useGet(`/house/${id}`)
 
   const toggleModalBook = () => setShowModalBook(!isShowModalBook)
+  const toggleAddDetails = () => setShowAddDetails(!isShowAddDetails)
 
   useEffect(() => {
-    const getHouse = async () => {
-      const response = await API.get(`/house/${id}`)
-      const house = response.data.data
-      setHouse(house)
-    }
-    getHouse()
+    setHouse(dataHouse)
     return () => {
       setHouse(null)
     }
-  }, [id])
+  }, [dataHouse])
 
-  if (!house) {
-    return <p>Loading...</p>
-  }
-
+  if (!house) return <p>Loading...</p>
   return (
     <>
-      <Header isWithSearch={false} />
       <div className='detailproperty'>
         <div className='detailproperty__images'>
           <div className='detailproperty__image'>
             <img src={house.image} alt='' />
           </div>
-          {/* <img src={detail_home_2} alt='' />
-          <img src={detail_home_3} alt='' />
-          <img src={detail_home_4} alt='' /> */}
+          {/* detail images */}
+          {house.detailImages?.length !== 0 && (
+            <div className='detailproperty__details'>
+              {house.detailImages?.map((image) => (
+                <div key={image.id} className='detailproperty__details-image'>
+                  <img src={image.url} alt='' />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className='detailproperty__content'>
           <h1 className='detailproperty__title'>{house.name}</h1>
@@ -52,11 +55,11 @@ function DetailProperty() {
               <div className='detailproperty__price'>
                 Rp.
                 {new Intl.NumberFormat(['ban', 'id']).format(
-                  house.price.toString()
+                  house.price?.toString()
                 )}{' '}
                 /{' '}
-                {house.typeRent.charAt(0).toUpperCase() +
-                  house.typeRent.slice(1)}
+                {house.typeRent?.charAt(0).toUpperCase() +
+                  house.typeRent?.slice(1)}
               </div>
               <div className='detailproperty__address'>{house.address}</div>
             </div>
@@ -85,20 +88,43 @@ function DetailProperty() {
             <h3>Description</h3>
             <p>{house.description}</p>
           </div>
-          <div className='detailproperty__cta'>
-            <button type='button' onClick={toggleModalBook}>
-              book now
-            </button>
-          </div>
+          {userState?.listAs === 'tenant' && (
+            <div className='detailproperty__cta'>
+              <button type='button' onClick={toggleModalBook}>
+                book now
+              </button>
+            </div>
+          )}
+          {userState?.listAs === 'owner' && (
+            <div className='detailproperty__cta'>
+              <button type='button' onClick={toggleAddDetails}>
+                add detail images
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      <Booking
-        isShowModalBook={isShowModalBook}
-        toggleModalBook={toggleModalBook}
-        typeRent={house.typeRent}
-        price={house.price}
-        houseId={house.id}
-      />
+      {userState?.listAs === 'tenant' ? (
+        <Modal
+          show={isShowModalBook}
+          toggle={toggleModalBook}
+          title='How long you will stay'
+        >
+          <AddTransaction
+            typeRent={house.typeRent}
+            price={house.price}
+            houseId={house.id}
+          />
+        </Modal>
+      ) : (
+        <Modal
+          show={isShowAddDetails}
+          toggle={toggleAddDetails}
+          title='Add Detail Images'
+        >
+          <AddDetailsImage id={id} updateHouse={updateHouse} />
+        </Modal>
+      )}
     </>
   )
 }

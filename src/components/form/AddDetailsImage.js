@@ -1,30 +1,29 @@
 import React, { useState } from 'react'
 import { API, configFormData } from '../../config/api'
 
-function AddAttachment(props) {
-  const { id, updateBookings } = props
+function AddDetailsImage({ id, updateHouse }) {
   const [form, setForm] = useState({})
+  const [isSuccess, setSuccess] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const data = new FormData()
-    data.append('attachment', form.attachment, form.attachment.name)
+    Array.from(form.details).forEach((image) => {
+      data.append('details', image, image.name)
+    })
 
-    const response = await API.patch(
-      `/order/addattachment/${id}`,
-      data,
-      configFormData
-    )
+    const response = await API.post(`/images/${id}`, data, configFormData)
 
-    // if error
+    // // if error
     if (response.data.status === 'failed') {
       // log the error message that we get from API
       return console.log(`Error: ${response.data.message}`)
     }
 
-    // if success
-    updateBookings()
+    // // if success
+    updateHouse()
+    setSuccess(true)
   }
 
   const handleFile = (e) => {
@@ -32,27 +31,32 @@ function AddAttachment(props) {
 
     setForm({
       ...form,
-      [name]: files[0],
+      [name]: files,
     })
+  }
+
+  if (isSuccess) {
+    return <p className='modal__text'>Detail Images berhasil ditambahkan!</p>
   }
 
   return (
     <>
-      <p>Silahkan memasukkan bukti pembayaran</p>
+      <p className='modal__text'>Silahkan masukkan gambar, maksimal 3 ya...</p>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <input
           type='file'
-          name='attachment'
-          id='attachment'
+          name='details'
+          id='details'
           accept='image/*'
           onChange={handleFile}
+          multiple
         />
         <button type='submit' className='modal__submit'>
-          Tambahkan payment proof
+          Add detail images
         </button>
       </form>
     </>
   )
 }
 
-export default AddAttachment
+export default AddDetailsImage

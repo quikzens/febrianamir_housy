@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext'
+import { UserContext } from '../../contexts/UserContext'
 
-import avatar from '../assets/images/avatar.png'
-import user_icon from '../assets/images/user-icon.svg'
-import calendar_icon from '../assets/images/calendar-icon-2.svg'
-import bill_icon from '../assets/images/bill-icon.svg'
-import cabin_icon from '../assets/images/cabin-icon.svg'
-import logout_icon from '../assets/images/logout-icon.svg'
+import avatar from '../../assets/images/avatar.png'
+import user_icon from '../../assets/images/user-icon.svg'
+import calendar_icon from '../../assets/images/calendar-icon-2.svg'
+import bill_icon from '../../assets/images/bill-icon.svg'
+import cabin_icon from '../../assets/images/cabin-icon.svg'
+import logout_icon from '../../assets/images/logout-icon.svg'
 
 import './UserInfo.css'
 
@@ -26,7 +26,7 @@ function UserInfo(props) {
   return (
     <div className='user-info'>
       <div className='user-info__avatar' onClick={toggleDropdown}>
-        <img src={avatar} alt='' />
+        <img src={userState.avatar ? userState.avatar : avatar} alt='' />
       </div>
       <div className={`user-info__dropdown ${show ? 'show' : ''}`}>
         <Link
@@ -36,6 +36,12 @@ function UserInfo(props) {
           <img src={user_icon} alt='' />
           <p>Profile</p>
         </Link>
+        {userState.listAs === 'owner' && (
+          <Link className='user-info__dropdown__item' to='/myhouses'>
+            <img src={cabin_icon} alt='' />
+            <p>My Houses</p>
+          </Link>
+        )}
         {userState.listAs === 'tenant' ? (
           <Link className='user-info__dropdown__item' to='/booking'>
             <img src={calendar_icon} alt='' />

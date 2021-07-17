@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { UserContext } from '../../contexts/UserContext'
 
+import Header from '../Header/Header'
+
 /**
  * Wrapper component to protect particular route
  * we use conditional rendering base on state to check
@@ -17,7 +19,14 @@ function PrivateRoute({ component: Component, ...rest }) {
       <Route
         {...rest}
         render={(props) =>
-          userState.username ? <Component {...props} /> : <Redirect to='/' />
+          userState?.username ? (
+            <>
+              <Header />
+              <Component {...props} />
+            </>
+          ) : (
+            <Redirect to='/' />
+          )
         }
       />
     </>

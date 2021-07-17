@@ -6,7 +6,7 @@ import { getTimeDifference, printDate } from '../library/time'
 import logo from '../assets/images/logo.svg'
 
 function BookingItem(props) {
-  const { booking } = props
+  const { booking, updateBookings } = props
   const { id, status, checkIn, checkOut, total, house, user, attachment } =
     booking
   const { difference, differenceType } = getTimeDifference(
@@ -108,7 +108,7 @@ function BookingItem(props) {
               <button onClick={toggleModal}>PAY</button>
             </div>
             <Modal show={showModal} toggle={toggleModal} title='Add attachment'>
-              <AddAttachment id={id} />
+              <AddAttachment id={id} updateBookings={updateBookings} />
             </Modal>
           </>
         )}

@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { API } from '../config/api'
-
-import Header from '../components/Header'
+import { API, configFormData } from '../config/api'
 
 import './AddProperty.css'
-
 import check_icon from '../assets/images/check.svg'
+import Modal from '../components/Modal/Modal'
 
 function AddProperty() {
   const [formValue, setFormValue] = useState({
@@ -20,11 +18,10 @@ function AddProperty() {
     bedroom: '',
     bathroom: '',
   })
+  const [isShow, setShow] = useState(false)
 
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+  const toggleModal = () => {
+    setShow(!isShow)
   }
 
   const handleChange = (e) => {
@@ -76,7 +73,7 @@ function AddProperty() {
       house.append('bathroom', data.bathroom)
       house.append('imageFile', data.imageFile, data.imageFile.name)
 
-      const response = await API.post('/house', house, config)
+      const response = await API.post('/house', house, configFormData)
 
       // if error
       if (response.data.status === 'failed') {
@@ -85,9 +82,7 @@ function AddProperty() {
       }
 
       // if success
-      const houseData = response.data.data
-      console.log(houseData)
-      console.log('Yes, property berhasil ditambahkan!')
+      toggleModal()
     } catch (error) {
       console.log(error)
     }
@@ -95,7 +90,6 @@ function AddProperty() {
 
   return (
     <>
-      <Header isWithSearch={false} />
       <main className='add-property'>
         <h2>Add Property</h2>
         <form
@@ -110,12 +104,14 @@ function AddProperty() {
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='city'>City</label>
-            <select name='cityId' id='city' onChange={handleChange}>
-              <option value='-'>-</option>
-              <option value='1'>Jakarta</option>
-              <option value='2'>Makassar</option>
-              <option value='3'>Surabaya</option>
-            </select>
+            <div className='form-select'>
+              <select name='cityId' id='city' onChange={handleChange}>
+                <option value='-'>-</option>
+                <option value='1'>Jakarta</option>
+                <option value='2'>Makassar</option>
+                <option value='3'>Surabaya</option>
+              </select>
+            </div>
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='address'>Address</label>
@@ -158,12 +154,14 @@ function AddProperty() {
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='typeRent'>Type Rent</label>
-            <select name='typeRent' id='typeRent' onChange={handleChange}>
-              <option value='-'>-</option>
-              <option value='day'>Day</option>
-              <option value='month'>Month</option>
-              <option value='year'>Year</option>
-            </select>
+            <div className='form-select'>
+              <select name='typeRent' id='typeRent' onChange={handleChange}>
+                <option value='-'>-</option>
+                <option value='day'>Day</option>
+                <option value='month'>Month</option>
+                <option value='year'>Year</option>
+              </select>
+            </div>
           </div>
           <div className='add-property__form-group amenities'>
             <label htmlFor='amenities'>Amenities</label>
@@ -211,31 +209,38 @@ function AddProperty() {
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='bedroom'>Bedroom</label>
-            <select name='bedroom' id='bedroom' onChange={handleChange}>
-              <option value='-'>-</option>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-            </select>
+            <div className='form-select'>
+              <select name='bedroom' id='bedroom' onChange={handleChange}>
+                <option value='-'>-</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+              </select>
+            </div>
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='bathroom'>Bathroom</label>
-            <select name='bathroom' id='bathroom' onChange={handleChange}>
-              <option value='-'>-</option>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-            </select>
+            <div className='form-select'>
+              <select name='bathroom' id='bathroom' onChange={handleChange}>
+                <option value='-'>-</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+              </select>
+            </div>
           </div>
           <div className='add-property__submit'>
             <button type='submit'>Add Property</button>
           </div>
         </form>
       </main>
+      <Modal show={isShow} toggle={toggleModal}>
+        <p>Yes, property berhasil ditambahkan!</p>
+      </Modal>
     </>
   )
 }

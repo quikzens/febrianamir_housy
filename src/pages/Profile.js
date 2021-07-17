@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react'
-import Header from '../components/Header'
-import { API } from '../config/api'
+import { useState, useEffect, useContext } from 'react'
+import { useGet } from '../hooks/useGet'
+import { UserContext } from '../contexts/UserContext'
 
-import ChangePassword from '../components/Modal/ChangePassword'
+import Modal from '../components/Modal/Modal'
+import AddAvatar from '../components/form/AddAvatar'
+import AddProfileImage from '../components/form/AddProfileImage'
+import ChangePassword from '../components/form/ChangePassword'
 
 import './Profile.css'
 import profil_icon from '../assets/images/profil-icon.svg'
@@ -16,30 +19,27 @@ import profile_foto from '../assets/images/profile.png'
 
 function Profile() {
   const [user, setUser] = useState(null)
-  const [isModalShow, setIsModalShow] = useState(false)
+  const [isChangePasswordShow, setIsChangePasswordShow] = useState(false)
+  const [isAvatarShow, setAvatarShow] = useState(false)
+  const [isProfileShow, setProfileShow] = useState(false)
+  const { userState } = useContext(UserContext)
+  const { data: dataUser } = useGet('/user')
 
-  const toggleModal = () => setIsModalShow(!isModalShow)
-
-  const getUser = async () => {
-    const response = await API.get('/user')
-    const user = response.data.data
-    return user
-  }
+  const toggleChangePassword = () =>
+    setIsChangePasswordShow(!isChangePasswordShow)
+  const toggleAvatar = () => setAvatarShow(!isAvatarShow)
+  const toggleProfile = () => setProfileShow(!isProfileShow)
 
   useEffect(() => {
-    const fetchData = async () => {
-      setUser(await getUser())
-    }
-    fetchData()
+    setUser(dataUser)
     return () => {
       setUser(null)
     }
-  }, [])
+  }, [dataUser])
 
   if (!user) return <p>Loading...</p>
   return (
     <>
-      <Header isWithSearch={false} />
       <section className='profile'>
         <div className='profile__content'>
           <div className='profile__info'>
@@ -72,9 +72,12 @@ function Profile() {
                     href='/'
                     onClick={(e) => {
                       e.preventDefault()
-                      toggleModal()
+                      toggleChangePassword()
                     }}
-                    style={{ color: 'var(--purple)', textDecoration: 'none' }}
+                    style={{
+                      color: 'var(--brand-clr)',
+                      textDecoration: 'none',
+                    }}
                   >
                     Change Password
                   </a>
@@ -120,13 +123,29 @@ function Profile() {
             </div>
           </div>
           <div className='profile__photo'>
-            <img src={profile_foto} alt='' />
-            <button>Change Photo Profile</button>
-            <button>Change Avatar</button>
+            <img src={userState?.profileImage || profile_foto} alt='' />
+            <button onClick={toggleProfile}>Change Photo Profile</button>
+            <button onClick={toggleAvatar}>Change Avatar</button>
           </div>
         </div>
       </section>
-      <ChangePassword isModalShow={isModalShow} toggleModal={toggleModal} />
+      <Modal
+        show={isChangePasswordShow}
+        toggle={toggleChangePassword}
+        title='Change Password'
+      >
+        <ChangePassword />
+      </Modal>
+      <Modal show={isAvatarShow} toggle={toggleAvatar} title='Add Avatar'>
+        <AddAvatar />
+      </Modal>
+      <Modal
+        show={isProfileShow}
+        toggle={toggleProfile}
+        title='Add Profile Image'
+      >
+        <AddProfileImage />
+      </Modal>
     </>
   )
 }

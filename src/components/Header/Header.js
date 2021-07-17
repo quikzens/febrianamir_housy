@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext'
+import { UserContext } from '../../contexts/UserContext'
 
-import SignIn from './Modal/SignIn'
-import SignUp from './Modal/SignUp'
-import UserInfo from './UserInfo'
+import Modal from '../Modal/Modal'
+import SignIn from '../form/SignIn'
+import SignUp from '../form/SignUp'
+import UserInfo from '../UserInfo/UserInfo'
 
 import './Header.css'
-
-import logo from '../assets/images/logo.svg'
-import search_icon from '../assets/images/search-icon.svg'
+import logo from '../../assets/images/logo.svg'
+import search_icon from '../../assets/images/search-icon.svg'
 
 function SearchBox(props) {
   const { applySearch, searchValue, handleChange } = props
@@ -28,7 +28,7 @@ function SearchBox(props) {
 }
 
 function Header(props) {
-  const { applySearch, isWithSearch } = props
+  const { applySearch } = props
   const { handleLogOut, userState } = useContext(UserContext)
 
   const [searchValue, setSearchValue] = useState('')
@@ -45,7 +45,7 @@ function Header(props) {
         <img className='header__logo' src={logo} alt='' />
       </Link>
 
-      {isWithSearch && (
+      {window.location.pathname === '/' && userState?.listAs !== 'owner' && (
         <SearchBox
           applySearch={applySearch}
           searchValue={searchValue}
@@ -54,7 +54,7 @@ function Header(props) {
       )}
 
       {/* if user is not login yet */}
-      {!userState.username ? (
+      {!userState?.username ? (
         <>
           <div className='header__btns'>
             <button className='header__btn' onClick={toggleSignInModal}>
@@ -65,15 +65,21 @@ function Header(props) {
             </button>
           </div>
 
-          <SignIn
-            isSignInActive={isSignInActive}
-            toggleSignInModal={toggleSignInModal}
-          />
+          <Modal
+            show={isSignInActive}
+            toggle={toggleSignInModal}
+            title='Sign In'
+          >
+            <SignIn />
+          </Modal>
 
-          <SignUp
-            isSignUpActive={isSignUpActive}
-            toggleSignUpModal={toggleSignUpModal}
-          />
+          <Modal
+            show={isSignUpActive}
+            toggle={toggleSignUpModal}
+            title='Sign Up'
+          >
+            <SignUp />
+          </Modal>
         </>
       ) : (
         <UserInfo handleLogOut={handleLogOut} />

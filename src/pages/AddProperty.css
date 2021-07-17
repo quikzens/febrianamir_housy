@@ -42,6 +42,16 @@
   appearance: none;
 }
 
+.form-select::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 22px;
+  height: 18px;
+  background-image: url('../assets/images/polygon.svg');
+}
+
 .add-property__form-group.amenities > div label {
   font-weight: 400;
 }
@@ -78,7 +88,7 @@
 }
 
 .checkbox input[type="checkbox"]:checked ~ .checkbox__control {
-  background-color: var(--purple);
+  background-color: var(--brand-clr);
 }
 
 .add-property__submit {
@@ -91,7 +101,7 @@
   padding: 0.75rem 5rem;
   font-weight: 800;
   color: white;
-  background-color: var(--purple);
+  background-color: var(--brand-clr);
   border: none;
   border-radius: 5px;
   cursor: pointer;

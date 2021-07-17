@@ -128,7 +128,7 @@ function FilterRoom(props) {
           filter={filter}
         />
         <FilterButton
-          content='5+'
+          content='5'
           ruleType='bedroom'
           ruleValue={5}
           updateFilter={updateFilter}
@@ -166,7 +166,7 @@ function FilterRoom(props) {
           filter={filter}
         />
         <FilterButton
-          content='5+'
+          content='5'
           ruleType='bathroom'
           ruleValue={5}
           updateFilter={updateFilter}

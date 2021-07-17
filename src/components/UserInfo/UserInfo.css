@@ -3,11 +3,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  user-select: none;
 }
 
 .user-info__avatar {
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   margin-right: 2.75rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .user-info__dropdown {

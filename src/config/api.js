@@ -11,3 +11,15 @@ export const setAuthToken = (token) => {
     delete API.defaults.headers.common['Authorization']
   }
 }
+
+export const configFormData = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+}
+
+export const configJSON = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+}

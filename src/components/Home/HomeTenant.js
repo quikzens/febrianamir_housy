@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header'
+import { useGet } from '../../hooks/useGet'
+
+import Header from '../Header/Header'
 import FilterRoom from '../FilterRoom/FilterRoom'
 import ListRoom from '../ListRoom/ListRoom'
-
-import { API } from '../../config/api'
 
 import mySet from '../../library/mySet'
 import './HomeTenant.css'
@@ -17,6 +17,7 @@ function HomeTenant() {
     budget: 12000000,
   })
   const [houses, setHouses] = useState(null)
+  const { data: dataHouses } = useGet('/houses')
 
   const updateFilter = (ruleType, ruleValue) => {
     switch (ruleType) {
@@ -79,7 +80,7 @@ function HomeTenant() {
   }
 
   const applyFilter = async () => {
-    const unfilteredContent = await getHouses()
+    const unfilteredContent = dataHouses
     const filteredContent = []
 
     unfilteredContent.forEach((item) => {
@@ -103,28 +104,19 @@ function HomeTenant() {
   }
 
   const applySearch = async (searchValue) => {
-    let houses = await getHouses()
+    let houses = dataHouses
     houses = houses.filter((house) =>
       house.address.toLowerCase().includes(searchValue.toLowerCase())
     )
     setHouses(houses)
   }
 
-  const getHouses = async () => {
-    const response = await API.get('/houses')
-    const houses = response.data.data
-    return houses
-  }
-
   useEffect(() => {
-    const fetchData = async () => {
-      setHouses(await getHouses())
-    }
-    fetchData()
+    setHouses(dataHouses)
     return () => {
       setHouses(null)
     }
-  }, [])
+  }, [dataHouses])
 
   return (
     <>

@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <>
-      {userState.listAs === 'owner' ? (
+      {userState?.listAs === 'owner' ? (
         <HomeOwner userState={userState} />
       ) : (
         <HomeTenant />

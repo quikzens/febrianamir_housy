@@ -47,7 +47,7 @@
 }
 
 .filter__btn.active {
-  background-color: rgba(90, 87, 171, 1);
+  background-color: var(--brand-clr);
   color: rgba(255, 255, 255, 1);
 }
 
@@ -97,7 +97,7 @@
   font-weight: inherit;
   text-transform: uppercase;
   color: inherit;  
-  background-color: rgba(90, 87, 171, 1);
+  background-color: var(--brand-clr);
   color: rgba(255, 255, 255, 1);
   text-align: center;
   cursor: pointer;
@@ -149,5 +149,5 @@
 }
 
 .filter__amenity.active .filter__amenity-icon {
-  background-color: rgba(90, 87, 171, 1);
+  background-color: var(--brand-clr);
 }

@@ -225,6 +225,7 @@ th:not([align]) {
 /* Variables */
 :root {
   --black: #212121;
+  --brand-clr: #4caf50;
   --purple: rgb(90, 87, 171);
   --red: red;
   --orange: rgb(253, 143, 40);
@@ -252,3 +253,27 @@ body {
 .text-capitalize {
   text-transform: capitalize;
 }
+
+/* .input-file {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.label-file {
+  display: inline-block;
+  max-width: 200px;
+  padding: 1rem;
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+  background-color: var(--black);
+  cursor: pointer;
+}
+
+.label-file:hover {
+  background-color: var(--brand-clr);
+} */

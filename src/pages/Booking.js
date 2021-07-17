@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'
+import { useGet } from '../hooks/useGet'
+
 import BookingItem from '../components/BookingItem'
 
-import { API } from '../config/api'
 import './Booking.css'
 
 function Booking() {
   const [bookings, setBookings] = useState(null)
-
-  const getBookings = async () => {
-    const response = await API.get('/orders?type=booking')
-    const dataBookings = response.data.data
-    setBookings(dataBookings)
-    console.log(dataBookings)
-  }
+  const { data: dataBookings, invoke: updateBookings } = useGet(
+    '/orders?type=booking'
+  )
 
   useEffect(() => {
-    getBookings()
+    setBookings(dataBookings.reverse())
     return () => {
       setBookings(null)
     }
-  }, [])
+  }, [dataBookings])
 
   return (
     <>
-      <Header isWithSearch={false} />
       {bookings ? (
         <div className='booking'>
+          {bookings.length <= 0 && <p>Data booking masih kosong</p>}
           {bookings.map((booking) => (
-            <BookingItem booking={booking} />
+            <BookingItem
+              booking={booking}
+              key={booking.id}
+              updateBookings={updateBookings}
+            />
           ))}
         </div>
       ) : (
