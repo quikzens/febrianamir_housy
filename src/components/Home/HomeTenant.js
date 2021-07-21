@@ -112,7 +112,7 @@ function HomeTenant() {
   }
 
   useEffect(() => {
-    setHouses(dataHouses)
+    setHouses(dataHouses.reverse())
     return () => {
       setHouses(null)
     }

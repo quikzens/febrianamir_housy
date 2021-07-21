@@ -228,6 +228,7 @@ th:not([align]) {
   --brand-clr: #4caf50;
   --purple: rgb(90, 87, 171);
   --red: red;
+  --light-red: rgba(236, 122, 122, 0.2);
   --orange: rgb(253, 143, 40);
   --green: rgb(21, 231, 21);
   --light-gray: rgb(249, 249, 249);
@@ -254,7 +255,7 @@ body {
   text-transform: capitalize;
 }
 
-/* .input-file {
+.input-file {
   width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
@@ -264,8 +265,10 @@ body {
 }
 
 .label-file {
-  display: inline-block;
-  max-width: 200px;
+  display: inline-flex !important;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0 !important;
   padding: 1rem;
   font-size: 1em;
   font-weight: 700;
@@ -274,6 +277,17 @@ body {
   cursor: pointer;
 }
 
+.label-file svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
 .label-file:hover {
   background-color: var(--brand-clr);
-} */
+}
+
+.preview-file {
+  display: block;
+  max-width: 400px;
+  margin-top: 1rem;
+}

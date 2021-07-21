@@ -7,11 +7,13 @@ function SignIn() {
     username: '',
     password: '',
   })
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = form
-    handleSignIn(username, password)
+    const { error } = await handleSignIn(username, password)
+    if (error) setError(error)
   }
 
   const handleChange = (e) => {
@@ -25,6 +27,11 @@ function SignIn() {
 
   return (
     <form className='modal__form' onSubmit={handleSubmit}>
+      {error && (
+        <div className='modal__alert'>
+          <p>{error}</p>
+        </div>
+      )}
       <div className='form-group'>
         <label htmlFor='username'>Username</label>
         <input

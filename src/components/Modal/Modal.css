@@ -110,6 +110,15 @@
   border: 2px solid rgba(210, 210, 210, 0.4);
 }
 
+.modal__alert {
+  max-width: 400px;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--light-red);
+}
+
 .modal__submit {
   margin-top: 3rem;
   display: block;

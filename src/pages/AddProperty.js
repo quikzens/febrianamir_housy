@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { API, configFormData } from '../config/api'
 
+import Modal from '../components/Modal/Modal'
+
 import './AddProperty.css'
 import check_icon from '../assets/images/check.svg'
-import Modal from '../components/Modal/Modal'
+import { BsCloudUpload } from 'react-icons/bs'
 
 function AddProperty() {
   const [formValue, setFormValue] = useState({
@@ -49,16 +51,28 @@ function AddProperty() {
   }
 
   const handleFile = (e) => {
+    const { name, files } = e.target
+
     setFormValue({
       ...formValue,
-      [e.target.name]: e.target.files[0],
+      [name]: files[0],
     })
+
+    const preview = document.querySelector('.preview-file')
+    if (files && files[0]) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        preview.setAttribute('src', e.target.result)
+      }
+
+      reader.readAsDataURL(files[0])
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = formValue
-    console.log(data)
     try {
       const house = new FormData()
       house.append('name', data.name)
@@ -100,7 +114,13 @@ function AddProperty() {
         >
           <div className='add-property__form-group'>
             <label htmlFor='name'>Property Name</label>
-            <input type='text' name='name' id='name' onChange={handleChange} />
+            <input
+              type='text'
+              name='name'
+              id='name'
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='city'>City</label>
@@ -119,11 +139,18 @@ function AddProperty() {
               name='address'
               id='address'
               onChange={handleChange}
+              required
             ></textarea>
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='area'>Area</label>
-            <input type='text' name='area' id='area' onChange={handleChange} />
+            <input
+              type='text'
+              name='area'
+              id='area'
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='price'>Price</label>
@@ -140,17 +167,8 @@ function AddProperty() {
               name='description'
               id='description'
               onChange={handleChange}
+              required
             ></textarea>
-          </div>
-          <div className='add-property__form-group'>
-            <label htmlFor='imageFile'>Image</label>
-            <input
-              type='file'
-              name='imageFile'
-              id='imageFile'
-              accept='image/*'
-              onChange={handleFile}
-            />
           </div>
           <div className='add-property__form-group'>
             <label htmlFor='typeRent'>Type Rent</label>
@@ -232,6 +250,22 @@ function AddProperty() {
                 <option value='5'>5</option>
               </select>
             </div>
+          </div>
+          <div className='add-property__form-group'>
+            <label>Image</label>
+            <label htmlFor='imageFile' className='label-file'>
+              <BsCloudUpload /> Choose an image
+            </label>
+            <input
+              type='file'
+              name='imageFile'
+              id='imageFile'
+              accept='image/*'
+              className='input-file'
+              onChange={handleFile}
+              required
+            />
+            <img src='' alt='' className='preview-file' />
           </div>
           <div className='add-property__submit'>
             <button type='submit'>Add Property</button>

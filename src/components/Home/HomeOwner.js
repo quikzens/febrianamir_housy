@@ -44,7 +44,7 @@ function HomeOwner() {
             <table className='home-owner__table'>
               <tbody>
                 <tr>
-                  <th>No</th>
+                  <th>ID</th>
                   <th>Users</th>
                   <th>Type of Rent</th>
                   <th>Bukti Transfer</th>
