@@ -4,6 +4,7 @@ import { useGet } from '../../hooks/useGet'
 import Header from '../Header/Header'
 import DetailInvo from '../DetailInvo'
 import Modal from '../Modal/Modal'
+import { BsImage } from 'react-icons/bs'
 
 import './HomeOwner.css'
 import action_icon from '../../assets/images/search-icon-2.svg'
@@ -64,13 +65,9 @@ function HomeOwner() {
                           href={transaction.attachment}
                           target='_blank'
                           rel='noreferrer'
+                          className='payment-proof'
                         >
-                          <img
-                            src='./images/icons/file-image.svg'
-                            alt=''
-                            width='25'
-                            height='25'
-                          />
+                          <BsImage />
                         </a>
                       </td>
                       <td

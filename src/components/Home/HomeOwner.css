@@ -42,6 +42,11 @@
   cursor: pointer;
 }
 
+.home-owner__table .payment-proof {
+  font-size: 1.6rem;
+  color: inherit;
+}
+
 .home-owner .approve {
   color: rgb(21, 231, 21);
 }
@@ -57,6 +62,3 @@
 .home-owner .booking__item .booking__content {
   border: 0;
 }
-
-
-
